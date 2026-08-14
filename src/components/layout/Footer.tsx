@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Instagram, MapPin, ShieldCheck, Mail } from "lucide-react";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
 import { STORES_DATA } from "@/data/stores";
@@ -12,12 +13,27 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Top Editorial Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-ivory/10">
-          {/* Brand Col */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
+          {/* Brand Col with Logo */}
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div>
-              <span className="text-2xl sm:text-3xl font-light tracking-[0.25em] uppercase text-ivory font-display block mb-3">
-                {OPTIK_EZIA_CONFIG.name}
-              </span>
+              <div className="flex items-center gap-3.5 mb-4">
+                <div className="relative w-10 h-10 rounded-md overflow-hidden border border-ivory/20 bg-black">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Ezia Optical Logo"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <span className="text-xl sm:text-2xl font-light tracking-[0.25em] uppercase text-ivory font-display block">
+                    {OPTIK_EZIA_CONFIG.name}
+                  </span>
+                  <span className="text-[8px] uppercase tracking-[0.3em] text-charcoal-light block -mt-0.5">
+                    EZIA OPTICAL INDONESIA
+                  </span>
+                </div>
+              </div>
               <p className="text-sm font-light text-charcoal-subtle leading-relaxed max-w-md mb-8">
                 {OPTIK_EZIA_CONFIG.shortDescription}
               </p>

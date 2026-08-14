@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Instagram, CheckCircle2 } from "lucide-react";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 export default function AboutPage() {
   return (
@@ -12,14 +13,27 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Page Header */}
         <div className="max-w-3xl pb-12 border-b border-sand-border">
-          <span className="editorial-tag text-accent-terracotta block mb-3">
-            TENTANG KAMI
-          </span>
-          <h1 className="editorial-headline text-4xl sm:text-6xl text-charcoal">
-            Mengenal Lebih Dekat Optik Ezia
-          </h1>
+          <div className="flex items-center gap-4 mb-4">
+            <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-charcoal/20 bg-black shadow-xs">
+              <Image
+                src="/images/logo.png"
+                alt="Optik Ezia Logo"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <span className="editorial-tag text-accent-terracotta">
+              IDENTITAS & FILOSOFI BRAND
+            </span>
+          </div>
+
+          <TextReveal
+            as="h1"
+            text="Mengenal Lebih Dekat Optik Ezia"
+            className="editorial-headline text-4xl sm:text-6xl text-charcoal"
+          />
           <p className="text-base sm:text-lg font-light text-charcoal-muted mt-4 leading-relaxed">
-            Menghadirkan pengalaman memilih kacamata dan pemeriksaan mata yang ramah, nyaman, dan terpercaya bagi setiap pelanggan.
+            Menghadirkan pengalaman memilih kacamata dan pemeriksaan mata yang ramah, nyaman, dan terpercaya bagi setiap pelanggan di Indonesia.
           </p>
         </div>
 

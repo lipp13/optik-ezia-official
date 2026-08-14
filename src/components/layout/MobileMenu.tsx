@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, MapPin, Instagram } from "lucide-react";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
@@ -45,14 +46,24 @@ export function MobileMenu({
             <Link
               href="/"
               onClick={onClose}
-              className="flex flex-col items-start focus:outline-none"
+              className="flex items-center gap-3 focus:outline-none"
             >
-              <span className="text-xl font-light tracking-[0.25em] uppercase text-charcoal font-display">
-                {OPTIK_EZIA_CONFIG.name}
-              </span>
-              <span className="text-[8px] uppercase tracking-[0.3em] text-charcoal-muted -mt-0.5">
-                EYEWEAR & OPTICAL CARE
-              </span>
+              <div className="relative w-8 h-8 rounded-md overflow-hidden border border-charcoal/20 bg-black">
+                <Image
+                  src="/images/logo.png"
+                  alt="Optik Ezia Logo"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-col items-start">
+                <span className="text-lg font-light tracking-[0.22em] uppercase text-charcoal font-display">
+                  {OPTIK_EZIA_CONFIG.name}
+                </span>
+                <span className="text-[8px] uppercase tracking-[0.28em] text-charcoal-muted -mt-0.5">
+                  EYEWEAR & OPTICAL CARE
+                </span>
+              </div>
             </Link>
             <button
               onClick={onClose}

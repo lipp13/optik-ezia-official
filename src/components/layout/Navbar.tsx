@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, MapPin } from "lucide-react";
 import { MobileMenu } from "./MobileMenu";
@@ -33,22 +34,33 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-[#FAF8F5]/90 backdrop-blur-md py-4 border-b border-sand-border/60 shadow-[0_4px_24px_rgba(0,0,0,0.03)]"
-            : "bg-transparent py-6"
+            ? "bg-[#FAF8F5]/92 backdrop-blur-md py-3.5 border-b border-sand-border/60 shadow-[0_4px_24px_rgba(0,0,0,0.03)]"
+            : "bg-transparent py-5 sm:py-6"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
-          {/* Logo */}
+          {/* Brand Logo with Image */}
           <Link
             href="/"
-            className="group flex flex-col items-start focus:outline-none"
+            className="group flex items-center gap-3.5 focus:outline-none"
           >
-            <span className="text-xl sm:text-2xl font-light tracking-[0.25em] uppercase text-charcoal font-display group-hover:opacity-80 transition-opacity">
-              {OPTIK_EZIA_CONFIG.name}
-            </span>
-            <span className="text-[8px] uppercase tracking-[0.3em] text-charcoal-muted -mt-0.5">
-              EYEWEAR & OPTICAL CARE
-            </span>
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-md overflow-hidden border border-charcoal/20 shadow-xs bg-black group-hover:scale-105 transition-transform duration-300">
+              <Image
+                src="/images/logo.png"
+                alt="Optik Ezia Logo"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            <div className="flex flex-col items-start">
+              <span className="text-lg sm:text-xl font-light tracking-[0.22em] uppercase text-charcoal font-display group-hover:opacity-85 transition-opacity">
+                {OPTIK_EZIA_CONFIG.name}
+              </span>
+              <span className="text-[8px] uppercase tracking-[0.28em] text-charcoal-muted -mt-0.5">
+                EYEWEAR & OPTICAL CARE
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

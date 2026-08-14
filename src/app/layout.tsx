@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { Preloader } from "@/components/ui/Preloader";
 
 const sansFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -14,25 +15,27 @@ const sansFont = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Optik Ezia — Modern Optical & Precision Eyewear",
+  metadataBase: new URL("https://optikezia.com"),
+  title: "Optik Ezia — Modern Eyewear & Optical Care",
   description:
-    "Pusat refraksi visual dan kurasi bingkai kacamata Japanese Beta-Titanium serta lensa presisi ZEISS Jerman di Indonesia. Kunjungi 6 butik kami di Jakarta, Surabaya, Bandung, Bali, dan Yogyakarta.",
-  keywords: [
-    "Optik Ezia",
-    "kacamata titanium",
-    "pemeriksaan mata Jakarta",
-    "lensa ZEISS Indonesia",
-    "kacamata anak",
-    "optik Surabaya",
-    "optik Bandung",
-    "optik Bali",
-  ],
+    "Kurasi kacamata, frame optikal, lensa, sunglasses, dan softlens dengan layanan pemeriksaan mata terpercaya di Indonesia. Cabang di Pondok Cina, Depok Town Square, Sentul City, Cimanggu, dan Gading Serpong.",
+  icons: {
+    icon: "/images/logo.png",
+  },
   openGraph: {
-    title: "Optik Ezia — Modern Optical & Precision Eyewear",
+    title: "Optik Ezia — Modern Eyewear & Optical Care",
     description:
-      "Perpaduan bingkai kacamata presisi Japanese Beta-Titanium dan standar pemeriksaan mata ZEISS Jerman.",
+      "Kurasi kacamata, frame optikal, lensa, sunglasses, dan layanan pemeriksaan mata di Indonesia.",
     type: "website",
     locale: "id_ID",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 400,
+        height: 400,
+        alt: "Optik Ezia Logo",
+      },
+    ],
   },
 };
 
@@ -44,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${sansFont.variable}`}>
       <body className="bg-ivory text-charcoal antialiased selection:bg-sand selection:text-charcoal font-sans">
+        <Preloader />
         <SmoothScroll>
           <CustomCursor />
           <Navbar />
