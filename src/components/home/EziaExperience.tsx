@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { SERVICES_PROCESS } from "@/data/services";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
@@ -34,15 +35,23 @@ export function EziaExperience() {
             {SERVICES_PROCESS.map((step, idx) => {
               const isActive = activeStepIndex === idx;
               return (
-                <div
+                <motion.div
                   key={step.stepNumber}
                   onClick={() => setActiveStepIndex(idx)}
-                  className={`p-6 border transition-all duration-300 cursor-pointer text-left ${
+                  whileHover={{ x: 4 }}
+                  className={`p-6 border transition-all duration-300 cursor-pointer text-left relative overflow-hidden ${
                     isActive
                       ? "bg-ivory-warm border-charcoal shadow-xs"
                       : "bg-ivory border-sand-border hover:border-charcoal/30"
                   }`}
                 >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeStepIndicator"
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-accent-terracotta"
+                    />
+                  )}
+
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs uppercase tracking-[0.2em] font-mono text-accent-terracotta">
                       TAHAP {step.stepNumber}
@@ -58,38 +67,60 @@ export function EziaExperience() {
                     {step.title}
                   </h3>
 
-                  {isActive && (
-                    <div className="mt-4 pt-4 border-t border-sand-border space-y-3">
-                      <p className="text-xs text-charcoal-muted leading-relaxed">
-                        {step.description}
-                      </p>
-                      <ul className="space-y-1.5 text-xs text-charcoal">
-                        {step.detailPoints.map((point, pIdx) => (
-                          <li key={pIdx} className="flex items-center gap-2">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-accent-terracotta shrink-0" />
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="mt-4 pt-4 border-t border-sand-border space-y-3">
+                          <p className="text-xs text-charcoal-muted leading-relaxed">
+                            {step.description}
+                          </p>
+                          <ul className="space-y-1.5 text-xs text-charcoal">
+                            {step.detailPoints.map((point, pIdx) => (
+                              <li key={pIdx} className="flex items-center gap-2">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-accent-terracotta shrink-0" />
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               );
             })}
           </div>
 
-          {/* Right Stage Visual Showcase */}
+          {/* Right Stage Visual Showcase with AnimatePresence crossfade */}
           <div className="lg:col-span-7 lg:sticky lg:top-28">
             <div className="bg-ivory-warm border border-sand-border p-6 sm:p-8 space-y-6">
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-sand/40 border border-sand-border">
-                <Image
-                  src={activeStep.image}
-                  alt={activeStep.title}
-                  fill
-                  className="object-cover transition-all duration-700 ease-editorial"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute top-4 left-4 bg-charcoal/90 text-ivory text-[10px] uppercase tracking-widest px-3 py-1.5 backdrop-blur-xs">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeStep.stepNumber}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full h-full relative"
+                  >
+                    <Image
+                      src={activeStep.image}
+                      alt={activeStep.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className="absolute top-4 left-4 bg-charcoal/90 text-ivory text-[10px] uppercase tracking-widest px-3 py-1.5 backdrop-blur-xs z-10">
                   TAHAP {activeStep.stepNumber} • {activeStep.subtitle}
                 </div>
               </div>
