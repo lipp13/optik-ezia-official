@@ -3,7 +3,13 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 import { ArrowRight, MapPin, Sparkles, ChevronDown } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
@@ -47,16 +53,28 @@ export function Hero() {
   });
 
   // Stage 1 (Welcome Scene) transitions out on scroll [0 -> 0.45]
-  const stage1Opacity = useTransform(scrollYProgress, [0, 0.35, 0.48], [1, 0.7, 0]);
+  const stage1Opacity = useTransform(
+    scrollYProgress,
+    [0, 0.35, 0.48],
+    [1, 0.7, 0],
+  );
   const stage1Scale = useTransform(scrollYProgress, [0, 0.45], [1, 0.92]);
   const stage1Y = useTransform(scrollYProgress, [0, 0.45], [0, -50]);
-  const stage1PointerEvents = useTransform(scrollYProgress, (v) => (v > 0.4 ? "none" : "auto"));
+  const stage1PointerEvents = useTransform(scrollYProgress, (v) =>
+    v > 0.4 ? "none" : "auto",
+  );
 
   // Stage 2 (Main Editorial Copy & Card) transitions in [0.45 -> 1.0]
-  const stage2Opacity = useTransform(scrollYProgress, [0.42, 0.58, 1], [0, 1, 1]);
+  const stage2Opacity = useTransform(
+    scrollYProgress,
+    [0.42, 0.58, 1],
+    [0, 1, 1],
+  );
   const stage2Scale = useTransform(scrollYProgress, [0.42, 0.62], [0.95, 1]);
   const stage2Y = useTransform(scrollYProgress, [0.42, 0.62], [40, 0]);
-  const stage2PointerEvents = useTransform(scrollYProgress, (v) => (v < 0.4 ? "none" : "auto"));
+  const stage2PointerEvents = useTransform(scrollYProgress, (v) =>
+    v < 0.4 ? "none" : "auto",
+  );
 
   return (
     <section
@@ -66,10 +84,9 @@ export function Hero() {
     >
       {/* Sticky Viewport Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        
         {/* Subtle Ambient Editorial Grid Background */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[linear-gradient(to_right,#171715_1px,transparent_1px),linear-gradient(to_bottom,#171715_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        
+
         {/* Ambient Soft Glow Orbs */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-sand/35 blur-[120px] pointer-events-none" />
 
@@ -155,7 +172,11 @@ export function Hero() {
             </span>
             <motion.div
               animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 1.6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
               <ChevronDown className="w-4 h-4 text-charcoal/60" />
             </motion.div>
@@ -176,7 +197,6 @@ export function Hero() {
         >
           <div className="max-w-7xl mx-auto w-full pt-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-              
               {/* Left Editorial Copy */}
               <div className="lg:col-span-7 flex flex-col justify-center space-y-7">
                 {/* Tagline Badge */}
@@ -199,7 +219,9 @@ export function Hero() {
 
                 {/* Supporting Copy */}
                 <p className="text-base sm:text-lg font-light text-charcoal-muted max-w-xl leading-relaxed">
-                  Optik Ezia menghadirkan kurasi kacamata, frame, lensa, sunglasses, dan softlens pilihan dengan layanan pemeriksaan mata serta fitting yang nyaman dan terpercaya.
+                  Optik Ezia menghadirkan kurasi kacamata, frame, lensa,
+                  sunglasses, dan softlens pilihan dengan layanan pemeriksaan
+                  mata serta fitting yang nyaman dan terpercaya.
                 </p>
 
                 {/* Action CTAs */}
@@ -231,16 +253,28 @@ export function Hero() {
                 {/* Value Highlights */}
                 <div className="pt-6 border-t border-sand-border grid grid-cols-3 gap-6 text-charcoal-muted">
                   <div>
-                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">Pemeriksaan</span>
-                    <span className="text-[11px] text-charcoal-light">Evaluasi refraksi mata</span>
+                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">
+                      Pemeriksaan
+                    </span>
+                    <span className="text-[11px] text-charcoal-light">
+                      Evaluasi refraksi mata
+                    </span>
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">Kurasi Frame</span>
-                    <span className="text-[11px] text-charcoal-light">Berbagai model & gaya</span>
+                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">
+                      Kurasi Frame
+                    </span>
+                    <span className="text-[11px] text-charcoal-light">
+                      Berbagai model & gaya
+                    </span>
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">Fitting Nyaman</span>
-                    <span className="text-[11px] text-charcoal-light">Penyesuaian proporsi wajah</span>
+                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">
+                      Fitting Nyaman
+                    </span>
+                    <span className="text-[11px] text-charcoal-light">
+                      Penyesuaian proporsi wajah
+                    </span>
                   </div>
                 </div>
               </div>
@@ -303,15 +337,15 @@ export function Hero() {
                   {/* Bottom Editorial Meta */}
                   <div className="flex items-center justify-between pt-3 border-t border-sand-border/70 text-[10px] uppercase tracking-widest text-charcoal-light mt-3">
                     <span>Pemeriksaan & Fitting</span>
-                    <span className="text-charcoal font-medium">Kenyamanan Maksimal</span>
+                    <span className="text-charcoal font-medium">
+                      Kenyamanan Maksimal
+                    </span>
                   </div>
                 </motion.div>
               </div>
-
             </div>
           </div>
         </motion.div>
-
       </div>
     </section>
   );
