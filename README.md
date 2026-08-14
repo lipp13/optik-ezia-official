@@ -1,25 +1,20 @@
 # Optik Ezia — Official Website
 
-Website profil perusahaan dan katalog resmi **Optik Ezia** yang dirancang dengan konsep **Modern Optical × Editorial Commerce × Premium Retail × Cinematic Full Motion**.
+Website profil perusahaan dan katalog resmi **Optik Ezia** yang dirancang dengan konsep **Modern Optical × Editorial Commerce × Premium Retail × Buttery Smooth Motion**.
 
-Dikembangkan secara khusus oleh **Alif Alfathar** untuk memberikan pengalaman visual yang tenang, hangat, informatif, dan interaktif bagi para pelanggan kacamata dan perawatan penglihatan di Indonesia.
+Dikembangkan secara khusus oleh **Alif Alfathar** dengan arsitektur performa tinggi yang sangat ringan, cepat, bersih, dan nyaman dijelajahi oleh pelanggan.
 
 ---
 
-## 📌 Fitur Utama & Motion Design
+## 📌 Keunggulan & Arsitektur Performa
 
-- **Hero Editorial & Interactive Tilt**: Presentasi kacamata modern dengan tipografi berjenjang (*Text Reveal*), fisika kemiringan kartu mengikuti kursor mouse (*Mouse Tilt Parallax*), dan tombol magnetik responsif.
+- **Ultra Lightweight & Fast (158 kB First Load JS)**: Bebas dari library 3D WebGL berat yang membebani GPU/RAM, digantikan dengan akselerasi GPU murni CSS 3D Transforms (`will-change: transform`, `preserve-3d`, `translate3d`).
+- **Hero Kinetic 3D Typography ("EZIA OPTICAL")**: Watermark 3D elegan bertuliskan *EZIA OPTICAL* yang merespons pergerakan kursor mouse secara kinetik tanpa *frame drop*.
+- **Preloader Mewah & Beranimasi**: Layar pembuka elegan dengan logo resmi *EZIA OPTICAL*, persentase progresif, dan transisi tirai penutup yang mulus.
 - **Galeri Horizontal Eyewear**: Eksplorasi koleksi frame dan kacamata hitam dengan navigasi horizontal yang halus dan kontrol geser.
-- **Katalog Produk Terkurasi & Tab Animasi**: Kategori lengkap (Frame Optikal, Sunglasses, Lensa Kacamata, Softlens) dengan transisi tata letak mulus (*Layout Spring Animations*).
+- **Katalog Produk Terkurasi & Tab Animasi**: Kategori lengkap (Frame Optikal, Sunglasses, Lensa Kacamata, Softlens) dengan transisi tata letak mulus.
 - **Alur Layanan & Pemeriksaan (The Ezia Experience)**: Panduan 5 tahapan layanan terpadu dengan transisi *crossfade* visual dan indikator aktif bertahap.
-- **Direktori Cabang & Area**: Informasi area cabang resmi Optik Ezia (Pondok Cina, Depok Town Square, Sentul City, Cimanggu, Gading Serpong) terhubung langsung ke media sosial resmi.
-- **Cinematic Motion Primitives**:
-  - *Text Reveal*: Tipografi dinamis kata demi kata.
-  - *Image Reveal*: Efek mask `clip-path` dan *parallax scroll* halus.
-  - *Magnetic Buttons*: Tombol dengan tarikan gaya magnetik fisika pegas.
-  - *Custom Cursor*: Kursor editorial khusus desktop dengan label aksi kontekstual (`LOKASI`, `KOLEKSI`), otomatis nonaktif pada layar sentuh/mobile.
-  - *Smooth Scroll*: Lenis 60fps dengan fallback `@media (prefers-reduced-motion: reduce)`.
-- **Integrasi Media Sosial Resmi**: Terhubung langsung ke Instagram resmi [@optikezia](https://www.instagram.com/optikezia).
+- **Direktori Cabang & Area**: Informasi area cabang resmi Optik Ezia (Pondok Cina, Depok Town Square, Sentul City, Cimanggu, Gading Serpong) terhubung langsung ke media sosial resmi [@optikezia](https://www.instagram.com/optikezia).
 
 ---
 
@@ -28,7 +23,7 @@ Dikembangkan secara khusus oleh **Alif Alfathar** untuk memberikan pengalaman vi
 - **Framework**: [Next.js 14](https://nextjs.org/) (App Router, TypeScript)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Motion & Animasi**: [Framer Motion](https://www.framer.com/motion/), [GSAP](https://gsap.com/)
-- **Smooth Scrolling**: [Lenis](https://lenis.darkroom.engineering/)
+- **Smooth Scrolling**: [Lenis](https://lenis.darkroom.engineering/) (Tuned 60 FPS)
 - **Ikonografi**: [Lucide React](https://lucide.dev/)
 
 ---
@@ -38,7 +33,7 @@ Dikembangkan secara khusus oleh **Alif Alfathar** untuk memberikan pengalaman vi
 ```text
 src/
 ├── app/
-│   ├── layout.tsx         # Root Layout, font, smooth scroll & kursor
+│   ├── layout.tsx         # Root Layout, metadata, preloader & smooth scroll
 │   ├── page.tsx           # Halaman utama (Homepage)
 │   ├── collection/        # Halaman katalog lengkap kacamata & lensa
 │   ├── services/          # Halaman layanan pemeriksaan mata & fitting
@@ -46,9 +41,9 @@ src/
 │   ├── about/             # Halaman profil & filosofi Optik Ezia
 │   └── globals.css        # Desain token, warna Warm Ivory & utilitas
 ├── components/
-│   ├── home/              # Komponen section homepage (Hero, BrandStory, HorizontalScroller, dll.)
+│   ├── home/              # Komponen section homepage (Hero, KineticText, BrandStory, dll.)
 │   ├── layout/            # Navbar, Mobile Menu, dan Footer
-│   └── ui/                # Motion primitives (TextReveal, ImageReveal, MagneticButton, CustomCursor)
+│   └── ui/                # Motion primitives (Preloader, TextReveal, ImageReveal, MagneticButton, CustomCursor)
 └── data/
     ├── optikEzia.ts       # Konfigurasi brand & media sosial resmi
     ├── stores.ts          # Data lokasi cabang
