@@ -99,7 +99,7 @@ export const PRODUCTS_DATA: EyewearProduct[] = [
     type: "Lensa Khusus Layar Digital",
     description:
       "Lensa dengan lapisan filter sinar biru untuk membantu mengurangi kelelahan mata saat menatap layar komputer dan smartphone.",
-    image: "https://images.unsplash.com/photo-1582142839970-2b9ffacce661?auto=format&fit=crop&q=80&w=1000",
+    image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&q=80&w=1000",
     lifestyleImage: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200",
     features: [
       "Filter sinar biru gawai",

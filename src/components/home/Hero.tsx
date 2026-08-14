@@ -4,9 +4,10 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
-import { ArrowRight, MapPin, Sparkles, Eye, ShieldCheck, Compass } from "lucide-react";
+import { ArrowRight, MapPin, Sparkles } from "lucide-react";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Hero3DTextBackground } from "@/components/3d/Hero3DTextBackground";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
 
 export function Hero() {
@@ -50,6 +51,9 @@ export function Hero() {
       onMouseLeave={handleMouseLeave}
       className="relative min-h-[96vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-ivory"
     >
+      {/* 3D Floating Typography Background "EZIA OPTICAL" */}
+      <Hero3DTextBackground />
+
       {/* Background Subtle Editorial Grid Lines */}
       <motion.div
         style={{ y: bgY }}
@@ -161,7 +165,7 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right Cinematic Editorial Composition (Full Motion, No 3D) */}
+          {/* Right Cinematic Editorial Composition */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
