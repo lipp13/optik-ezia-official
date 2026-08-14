@@ -5,27 +5,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, MapPin, Sparkles, ChevronDown } from "lucide-react";
-import { TextReveal } from "@/components/ui/TextReveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Mouse tilt physics for the Welcome 3D stage
+  // Mouse tilt physics for ambient elements
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 28, stiffness: 140, mass: 0.2 };
+  const springConfig = { damping: 26, stiffness: 120, mass: 0.2 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  const welcomeRotateX = useTransform(smoothY, [-0.5, 0.5], [14, -14]);
-  const welcomeRotateY = useTransform(smoothX, [-0.5, 0.5], [-16, 16]);
-  const welcomeTranslateX = useTransform(smoothX, [-0.5, 0.5], [-25, 25]);
-  const welcomeTranslateY = useTransform(smoothY, [-0.5, 0.5], [-20, 20]);
+  const welcomeRotateX = useTransform(smoothY, [-0.5, 0.5], [10, -10]);
+  const welcomeRotateY = useTransform(smoothX, [-0.5, 0.5], [-12, 12]);
+  const welcomeTranslateX = useTransform(smoothX, [-0.5, 0.5], [-20, 20]);
+  const welcomeTranslateY = useTransform(smoothY, [-0.5, 0.5], [-15, 15]);
 
-  // Card tilt for Stage 2
+  // Card physics for Stage 2
   const cardRotateX = useTransform(smoothY, [-0.5, 0.5], [8, -8]);
   const cardRotateY = useTransform(smoothX, [-0.5, 0.5], [-8, 8]);
   const cardX = useTransform(smoothX, [-0.5, 0.5], [-12, 12]);
@@ -37,39 +36,41 @@ export function Hero() {
     mouseY.set(e.clientY / innerHeight - 0.5);
   };
 
-  // Scroll Progress Orchestration for 200vh container
+  // Scroll Progress Orchestration for 200vh pinned sequence
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Stage 1 (Welcome) fades and scales out on scroll [0 -> 0.45]
-  const stage1Opacity = useTransform(scrollYProgress, [0, 0.35, 0.48], [1, 0.8, 0]);
-  const stage1Scale = useTransform(scrollYProgress, [0, 0.45], [1, 0.9]);
-  const stage1Y = useTransform(scrollYProgress, [0, 0.45], [0, -60]);
+  // Stage 1 (Welcome Scene) transitions out on scroll [0 -> 0.45]
+  const stage1Opacity = useTransform(scrollYProgress, [0, 0.35, 0.48], [1, 0.7, 0]);
+  const stage1Scale = useTransform(scrollYProgress, [0, 0.45], [1, 0.92]);
+  const stage1Y = useTransform(scrollYProgress, [0, 0.45], [0, -50]);
   const stage1PointerEvents = useTransform(scrollYProgress, (v) => (v > 0.4 ? "none" : "auto"));
 
-  // Stage 2 (Editorial Copy & Card) fades and slides in [0.45 -> 1.0]
-  const stage2Opacity = useTransform(scrollYProgress, [0.42, 0.55, 1], [0, 1, 1]);
-  const stage2Scale = useTransform(scrollYProgress, [0.42, 0.6], [0.94, 1]);
-  const stage2Y = useTransform(scrollYProgress, [0.42, 0.6], [50, 0]);
+  // Stage 2 (Main Editorial Copy & Card) transitions in [0.45 -> 1.0]
+  const stage2Opacity = useTransform(scrollYProgress, [0.42, 0.58, 1], [0, 1, 1]);
+  const stage2Scale = useTransform(scrollYProgress, [0.42, 0.62], [0.95, 1]);
+  const stage2Y = useTransform(scrollYProgress, [0.42, 0.62], [40, 0]);
   const stage2PointerEvents = useTransform(scrollYProgress, (v) => (v < 0.4 ? "none" : "auto"));
 
   return (
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative h-[210vh] bg-ivory"
+      className="relative h-[200vh] bg-ivory"
     >
-      {/* Sticky Viewport Frame */}
+      {/* Sticky Viewport Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         
-        {/* Subtle Ambient Grid Background */}
+        {/* Subtle Ambient Editorial Grid Background */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[linear-gradient(to_right,#171715_1px,transparent_1px),linear-gradient(to_bottom,#171715_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-sand/35 blur-[120px] pointer-events-none" />
+        
+        {/* Ambient Soft Glow Orbs */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-sand/35 blur-[120px] pointer-events-none" />
 
         {/* ======================================================== */}
-        {/* STAGE 1: CINEMATIC WELCOME SCENE ("EZIA OPTICAL")        */}
+        {/* STAGE 1: SOFI-STYLE CLEAN CINEMATIC WELCOME              */}
         {/* ======================================================== */}
         <motion.div
           style={{
@@ -78,20 +79,20 @@ export function Hero() {
             y: stage1Y,
             pointerEvents: stage1PointerEvents as any,
           }}
-          className="absolute inset-0 flex flex-col items-center justify-between p-8 sm:p-14 z-20"
+          className="absolute inset-0 flex flex-col items-center justify-between pt-28 pb-12 px-6 sm:px-12 z-20"
         >
-          {/* Top Pill */}
+          {/* Refined Minimalist Category Tag (Properly Spaced Below Navbar) */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="pt-16 sm:pt-14 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sand/40 border border-sand-border text-[11px] uppercase tracking-[0.22em] text-charcoal-muted"
+            transition={{ duration: 0.7 }}
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-sand/40 border border-sand-border text-[11px] uppercase tracking-[0.24em] text-charcoal-muted"
           >
-            <Sparkles className="w-3.5 h-3.5 text-accent-gold" />
-            <span>Welcome to Optik Ezia</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-terracotta animate-pulse" />
+            <span>Optik Ezia • Indonesian Eyewear & Eye Care</span>
           </motion.div>
 
-          {/* Center 3D Grand Typography with Physics */}
+          {/* Grand Clean 3D Typography (No redundant logo box) */}
           <div
             className="my-auto flex flex-col items-center justify-center text-center select-none"
             style={{ perspective: 1000 }}
@@ -106,52 +107,35 @@ export function Hero() {
               }}
               className="space-y-4 will-change-transform flex flex-col items-center"
             >
-              {/* Logo Icon Badge */}
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                style={{ transform: "translateZ(40px)" }}
-                className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border border-charcoal/20 bg-black shadow-md"
-              >
-                <Image
-                  src="/images/logo.png"
-                  alt="Ezia Optical"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </motion.div>
-
-              {/* Grand 3D Heading */}
-              <div style={{ transform: "translateZ(60px)" }}>
-                <h1 className="editorial-headline text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-charcoal tracking-tight font-extralight uppercase">
+              {/* Grand Elegant Title */}
+              <div style={{ transform: "translateZ(50px)" }}>
+                <h1 className="editorial-headline text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-charcoal tracking-tight font-extralight uppercase leading-none">
                   EZIA OPTICAL
                 </h1>
               </div>
 
               {/* Subtitle Tagline */}
-              <div style={{ transform: "translateZ(30px)" }}>
-                <p className="text-xs sm:text-sm md:text-base font-light tracking-[0.3em] uppercase text-accent-terracotta">
+              <div style={{ transform: "translateZ(25px)" }}>
+                <p className="text-xs sm:text-sm md:text-base font-light tracking-[0.32em] uppercase text-accent-terracotta">
                   Modern Eyewear • Precision Eye Care
                 </p>
               </div>
             </motion.div>
           </div>
 
-          {/* Bottom Scroll Prompt */}
+          {/* Bottom Clean Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
             className="flex flex-col items-center space-y-2 text-charcoal-muted"
           >
-            <span className="text-[10px] uppercase tracking-[0.25em] font-medium font-mono">
+            <span className="text-[10px] uppercase tracking-[0.25em] font-medium font-mono text-charcoal-light">
               GULIR KE BAWAH UNTUK MENJELAJAH
             </span>
             <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
             >
               <ChevronDown className="w-4 h-4 text-charcoal/60" />
             </motion.div>
