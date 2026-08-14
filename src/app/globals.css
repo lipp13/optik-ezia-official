@@ -103,9 +103,18 @@ html.lenis, html.lenis body {
   @apply btn-editorial border border-charcoal/20 text-charcoal hover:border-charcoal hover:bg-charcoal/5 active:scale-[0.98];
 }
 
-/* Subtle Mask & Transitions */
-.clip-editorial {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+/* Subtle Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 12s linear infinite;
 }
 
 /* Reduced Motion Override */
