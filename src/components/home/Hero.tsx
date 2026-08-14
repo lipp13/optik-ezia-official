@@ -24,6 +24,10 @@ export function Hero() {
   const welcomeTranslateX = useTransform(smoothX, [-0.5, 0.5], [-20, 20]);
   const welcomeTranslateY = useTransform(smoothY, [-0.5, 0.5], [-15, 15]);
 
+  // Ambient optical ring parallax
+  const ringX = useTransform(smoothX, [-0.5, 0.5], [30, -30]);
+  const ringY = useTransform(smoothY, [-0.5, 0.5], [20, -20]);
+
   // Card physics for Stage 2
   const cardRotateX = useTransform(smoothY, [-0.5, 0.5], [8, -8]);
   const cardRotateY = useTransform(smoothX, [-0.5, 0.5], [-8, 8]);
@@ -79,22 +83,38 @@ export function Hero() {
             y: stage1Y,
             pointerEvents: stage1PointerEvents as any,
           }}
-          className="absolute inset-0 flex flex-col items-center justify-between pt-28 pb-12 px-6 sm:px-12 z-20"
+          className="absolute inset-0 flex flex-col items-center justify-between pt-28 pb-12 px-6 sm:px-12 z-20 overflow-hidden"
         >
-          {/* Refined Minimalist Category Tag (Properly Spaced Below Navbar) */}
+          {/* Subtle Ambient Optical Rings in Background */}
+          <motion.div
+            style={{ x: ringX, y: ringY }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 sm:opacity-30"
+          >
+            <div className="relative w-[320px] h-[320px] sm:w-[540px] sm:h-[540px] rounded-full border border-charcoal/20 flex items-center justify-center">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                className="w-[84%] h-[84%] rounded-full border border-dashed border-accent-terracotta/30"
+              />
+              <div className="absolute w-full h-[1px] bg-charcoal/10" />
+              <div className="absolute h-full w-[1px] bg-charcoal/10" />
+            </div>
+          </motion.div>
+
+          {/* Refined Minimalist Category Tag */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-sand/40 border border-sand-border text-[11px] uppercase tracking-[0.24em] text-charcoal-muted"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-sand/40 border border-sand-border text-[11px] uppercase tracking-[0.24em] text-charcoal-muted z-10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-accent-terracotta animate-pulse" />
             <span>Optik Ezia • Indonesian Eyewear & Eye Care</span>
           </motion.div>
 
-          {/* Grand Clean 3D Typography (No redundant logo box) */}
+          {/* Grand Clean 3D Typography */}
           <div
-            className="my-auto flex flex-col items-center justify-center text-center select-none"
+            className="my-auto flex flex-col items-center justify-center text-center select-none z-10"
             style={{ perspective: 1000 }}
           >
             <motion.div
@@ -128,7 +148,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="flex flex-col items-center space-y-2 text-charcoal-muted"
+            className="flex flex-col items-center space-y-2 text-charcoal-muted z-10"
           >
             <span className="text-[10px] uppercase tracking-[0.25em] font-medium font-mono text-charcoal-light">
               GULIR KE BAWAH UNTUK MENJELAJAH
