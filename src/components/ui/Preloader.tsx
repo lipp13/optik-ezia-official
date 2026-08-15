@@ -2,18 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Preloader() {
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
-
-  // Motion values untuk smooth curtain effect
-  const curtainProgress = useMotionValue(0);
-  const curtainY = useTransform(curtainProgress, [0, 1], ["0%", "-100%"]);
-  const contentOpacity = useTransform(curtainProgress, [0, 0.3], [1, 0]);
-  const contentScale = useTransform(curtainProgress, [0, 1], [1, 0.95]);
 
   useEffect(() => {
     // Check if user prefers reduced motion
@@ -31,15 +24,10 @@ export function Preloader() {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
+          // Wait a bit at 100% then start exit animation
           setTimeout(() => {
-            setIsExiting(true);
-            // Animate curtain up
-            curtainProgress.set(1);
-            // Remove loader after animation completes
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1400); // Match with curtain animation duration
-          }, 400);
+            setIsLoading(false);
+          }, 600);
           return 100;
         }
         // Smooth non-linear increment for organic feel
@@ -49,21 +37,22 @@ export function Preloader() {
     }, 50);
 
     return () => clearInterval(interval);
-  }, [curtainProgress]);
+  }, []);
 
-  // Smooth ease for curtain
-  const curtainEase = [0.76, 0, 0.24, 1]; // Custom easeInOutQuart
+  // Super smooth curtain ease - perfect for upward motion
+  const curtainEase = [0.76, 0, 0.24, 1]; // easeInOutQuart
 
   return (
     <AnimatePresence mode="wait">
       {isLoading && (
         <motion.div
-          style={{
-            y: isExiting ? curtainY : "0%",
-          }}
-          transition={{
-            duration: 1.4,
-            ease: curtainEase,
+          initial={{ y: "0%" }}
+          exit={{ 
+            y: "-100%",
+            transition: {
+              duration: 1.2,
+              ease: curtainEase,
+            }
           }}
           className="fixed inset-0 z-[99999] bg-gradient-to-br from-[#1a1816] via-[#121210] to-[#0a0a08] overflow-hidden"
         >
@@ -99,12 +88,11 @@ export function Preloader() {
             className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-terracotta/15 rounded-full blur-[100px]"
           />
 
-          {/* Main Content - Fades out during exit */}
+          {/* Main Content - Will slide up with the curtain */}
           <motion.div
-            style={{
-              opacity: isExiting ? contentOpacity : 1,
-              scale: isExiting ? contentScale : 1,
-            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
             className="relative h-full flex flex-col justify-between p-6 sm:p-12 lg:p-16 select-none"
           >
             {/* Top Brand Bar */}
@@ -302,14 +290,8 @@ export function Preloader() {
             </div>
           </motion.div>
 
-          {/* Curtain Edge Shadow for depth */}
-          <motion.div
-            style={{
-              opacity: isExiting ? 1 : 0,
-            }}
-            transition={{ duration: 0.6 }}
-            className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"
-          />
+          {/* Curtain Bottom Shadow for depth - appears during exit */}
+          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
         </motion.div>
       )}
     </AnimatePresence>
