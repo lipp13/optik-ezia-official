@@ -2,86 +2,142 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { ImageReveal } from "@/components/ui/ImageReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
+import { motion } from "framer-motion";
 
 export function BrandStory() {
   return (
-    <section className="py-24 sm:py-32 bg-ivory-warm border-t border-b border-sand-border relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <section className="py-24 sm:py-32 bg-ivory-warm border-t border-b border-sand-border/50 relative overflow-hidden">
+      {/* Subtle decorative elements */}
+      <div className="absolute top-20 right-20 w-32 h-32 bg-sand/20 rounded-full blur-3xl animate-float-gentle opacity-40" />
+      <div className="absolute bottom-32 left-32 w-40 h-40 bg-accent-gold/10 rounded-full blur-3xl animate-pulse-glow opacity-30" />
+      
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-          <div className="lg:col-span-5">
-            <span className="editorial-tag text-accent-terracotta block mb-3">
-              FILOSOFI LAYANAN
-            </span>
+          <motion.div 
+            className="lg:col-span-5"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <span className="editorial-tag text-accent-terracotta">
+                FILOSOFI LAYANAN
+              </span>
+            </div>
             <TextReveal
               as="h2"
               text="Bukan Sekadar Kacamata. Kenyamanan Pandangan Anda."
               className="editorial-headline text-3xl sm:text-4xl lg:text-5xl text-charcoal"
             />
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-7 space-y-6 text-charcoal-muted font-light leading-relaxed">
+          <motion.div 
+            className="lg:col-span-7 space-y-6 text-charcoal-muted font-light leading-relaxed"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
             <p className="text-base sm:text-lg">
               Di Optik Ezia, kami percaya kacamata adalah perpaduan antara fungsi optik yang tepat dan rasa percaya diri pemakainya. Kami siap membantu Anda menemukan kacamata yang tidak hanya pas dengan ukuran mata, tetapi juga serasi dengan bentuk wajah dan rutinitas harian.
             </p>
             <p className="text-sm sm:text-base">
               Dari pemeriksaan mata, konsultasi kebutuhan lensa anti-radiasi atau progresif, hingga penyetelan kenyamanan bingkai, kami berkomitmen memberikan pelayanan optik yang ramah dan terpercaya.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Editorial Asymmetric Visual Grid with ImageReveal */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-16 lg:mt-24 items-center">
           {/* Main Large Image */}
-          <div className="md:col-span-7 relative group overflow-hidden bg-sand/30 border border-sand-border">
+          <motion.div 
+            className="md:col-span-7 relative group overflow-hidden bg-sand/30 border border-sand-border hover:border-accent-terracotta/30 transition-all hover-lift"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <ImageReveal
               src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=1200"
               alt="Optik Ezia Lifestyle Eyewear"
               aspectRatio="aspect-[4/3]"
             />
-            <div className="p-6 bg-ivory/95 flex items-center justify-between border-t border-sand-border text-xs tracking-wider">
+            <div className="p-6 bg-ivory/95 backdrop-blur-sm flex items-center justify-between border-t border-sand-border text-xs tracking-wider">
               <div>
                 <span className="font-semibold uppercase text-charcoal block">Pilihan Frame & Lensa</span>
                 <span className="text-charcoal-light">Konsultasi penyesuaian bentuk wajah di cabang</span>
               </div>
               <span className="editorial-tag text-charcoal">OPTIK EZIA</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Secondary Stacked Content & Detail Card */}
           <div className="md:col-span-5 flex flex-col space-y-8">
-            <div className="relative aspect-[5/4] w-full overflow-hidden bg-sand/30 border border-sand-border group">
+            <motion.div 
+              className="relative aspect-[5/4] w-full overflow-hidden bg-sand/30 border border-sand-border group hover:border-accent-gold/30 transition-all hover-lift"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               <ImageReveal
                 src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&q=80&w=1000"
                 alt="Frame Kacamata Berkualitas"
                 aspectRatio="aspect-[5/4]"
               />
-              <div className="absolute top-4 right-4 bg-charcoal/90 text-ivory text-[10px] uppercase tracking-widest px-3 py-1.5 backdrop-blur-xs z-10">
+              <div className="absolute top-4 right-4 bg-charcoal/90 text-ivory text-[10px] uppercase tracking-widest px-3 py-1.5 backdrop-blur-xs z-10 group-hover:bg-accent-terracotta transition-colors">
                 Koleksi Eyewear
               </div>
-            </div>
+            </motion.div>
 
             {/* Feature Checklist */}
-            <div className="p-8 bg-ivory border border-sand-border space-y-4">
-              <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-charcoal">
+            <motion.div 
+              className="p-8 bg-ivory border border-sand-border space-y-4 hover:border-charcoal/20 transition-all hover-lift"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-charcoal flex items-center gap-2">
+                <span className="w-8 h-[1px] bg-accent-terracotta"></span>
                 Fokus Pelayanan Optik Ezia
               </h4>
               <ul className="space-y-3 text-xs text-charcoal-muted">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-accent-terracotta shrink-0 mt-0.5" />
+                <motion.li 
+                  className="flex items-start gap-3 group/item"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <CheckCircle2 className="w-4 h-4 text-accent-terracotta shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform" />
                   <span>Pemeriksaan ketajaman mata dan refraksi</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-accent-terracotta shrink-0 mt-0.5" />
+                </motion.li>
+                <motion.li 
+                  className="flex items-start gap-3 group/item"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <CheckCircle2 className="w-4 h-4 text-accent-terracotta shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform" />
                   <span>Pilihan frame optikal, sunglasses, dan softlens</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-accent-terracotta shrink-0 mt-0.5" />
+                </motion.li>
+                <motion.li 
+                  className="flex items-start gap-3 group/item"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <CheckCircle2 className="w-4 h-4 text-accent-terracotta shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform" />
                   <span>Penyetelan posisi kacamata agar pas dan nyaman</span>
-                </li>
+                </motion.li>
               </ul>
               
               <div className="pt-4 border-t border-sand-border">
@@ -93,7 +149,7 @@ export function BrandStory() {
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

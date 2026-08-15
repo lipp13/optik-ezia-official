@@ -30,6 +30,7 @@ body {
   color: #171715;
   overflow-x: hidden;
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overscroll-behavior-y: none;
 }
 
 ::selection {
@@ -84,23 +85,25 @@ html.lenis, html.lenis body {
 
 .editorial-tag {
   @apply text-[11px] uppercase tracking-[0.2em] font-medium text-charcoal-muted;
+  letter-spacing: 0.2em;
 }
 
 .editorial-headline {
-  @apply tracking-[-0.03em] font-light text-charcoal leading-[1.05];
+  @apply tracking-[-0.02em] font-light text-charcoal leading-[1.1];
+  font-variation-settings: 'wght' 300;
 }
 
-/* Button tactile styling */
+/* Button tactile styling - More refined */
 .btn-editorial {
-  @apply relative inline-flex items-center justify-center gap-3 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] transition-all duration-300;
+  @apply relative inline-flex items-center justify-center gap-3 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] transition-all duration-500 ease-out;
 }
 
 .btn-editorial-primary {
-  @apply btn-editorial bg-charcoal text-ivory hover:bg-charcoal-deep active:scale-[0.98];
+  @apply btn-editorial bg-charcoal text-ivory hover:bg-charcoal-deep hover:shadow-medium active:scale-[0.98];
 }
 
 .btn-editorial-outline {
-  @apply btn-editorial border border-charcoal/20 text-charcoal hover:border-charcoal hover:bg-charcoal/5 active:scale-[0.98];
+  @apply btn-editorial border border-charcoal/20 text-charcoal hover:border-charcoal/50 hover:bg-charcoal/5 active:scale-[0.98];
 }
 
 /* Subtle Shimmer Effect */
@@ -117,6 +120,416 @@ html.lenis, html.lenis body {
   animation: shimmer 12s linear infinite;
 }
 
+/* Gradient Animations - More subtle */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient-shift 12s ease infinite;
+  background-size: 200% 200%;
+}
+
+/* Floating Animation - Smoother */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-12px) translateX(8px);
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 12s ease-in-out infinite;
+}
+
+/* Pulse Glow Animation - More subtle */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+
+/* Fade In Up Animation - Smoother */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scale In Animation - More refined */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Glass Morphism Effect - Cleaner */
+.glass-effect {
+  background: rgba(250, 248, 245, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(237, 231, 220, 0.3);
+}
+
+/* Hover Lift Effect - Smoother */
+.hover-lift {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #8E5238 0%, #C2A478 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Smooth Border Animation */
+@keyframes border-flow {
+  0%, 100% {
+    border-color: rgba(237, 231, 220, 0.5);
+  }
+  50% {
+    border-color: rgba(142, 82, 56, 0.3);
+  }
+}
+
+.animate-border-flow {
+  animation: border-flow 3s ease-in-out infinite;
+}
+
+/* Stagger children animation */
+.stagger-children > * {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Image zoom on hover - Smoother */
+.zoom-on-hover {
+  overflow: hidden;
+}
+
+.zoom-on-hover img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zoom-on-hover:hover img {
+  transform: scale(1.05);
+}
+
+/* Shine effect - More subtle */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(30deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(30deg);
+    opacity: 0;
+  }
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Magnetic hover effect */
+.magnetic-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth reveal on scroll */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Leaflet Map Custom Styles */
+.leaflet-container {
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #FAF8F5;
+  border: 1px solid #EDE7DC;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-popup-tip {
+  background: #FAF8F5;
+  border: 1px solid #EDE7DC;
+  box-shadow: none;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: #171715;
+  font-size: 20px;
+  padding: 8px 8px 0 0;
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+  color: #8E5238;
+}
+
+/* Custom Marker Animation */
+.custom-marker {
+  animation: marker-bounce 0.5s ease-out;
+}
+
+@keyframes marker-bounce {
+  0% {
+    transform: translateY(-20px) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(5px) scale(1.1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile-specific improvements (320px - 640px) */
+@media (max-width: 640px) {
+  .leaflet-control-zoom {
+    margin-top: 60px !important;
+  }
+  
+  .leaflet-popup-content-wrapper {
+    max-width: 250px;
+  }
+  
+  /* Reduce motion intensity on mobile */
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Better touch targets */
+  button, a {
+    min-height: 44px;
+  }
+  
+  /* Optimize text sizes */
+  .editorial-headline {
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  
+  /* Better spacing on mobile */
+  section {
+    scroll-margin-top: 70px;
+    padding-top: max(4rem, env(safe-area-inset-top));
+    padding-bottom: max(4rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Reduce padding on mobile */
+  .max-w-7xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Stack buttons full width */
+  .btn-editorial {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Smaller gaps on mobile */
+  .space-y-7 {
+    gap: 1.25rem;
+  }
+}
+
+/* Tablet optimizations (641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .editorial-headline {
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+  
+  /* Optimize grid for tablet */
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  /* Better spacing for tablet */
+  section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  
+  /* Adjust container padding */
+  .max-w-7xl {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Small tablets and large phones (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Optimize font sizes */
+  .text-5xl {
+    font-size: 2.5rem;
+  }
+  
+  .text-6xl {
+    font-size: 3rem;
+  }
+  
+  /* Better button sizing */
+  .btn-editorial {
+    padding: 0.875rem 1.5rem;
+    font-size: 11px;
+  }
+}
+
+/* Landscape mobile (height < 600px) */
+@media (max-height: 600px) and (orientation: landscape) {
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  /* Reduce hero height on landscape */
+  .h-screen {
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  /* Compact spacing */
+  .space-y-7 {
+    gap: 1rem;
+  }
+  
+  /* Smaller headlines on landscape */
+  .editorial-headline {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+/* Safe area for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* Improve tap highlight */
+* {
+  -webkit-tap-highlight-color: rgba(237, 231, 220, 0.3);
+}
+
+/* Smooth font rendering on all devices */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Better focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid #8E5238;
+  outline-offset: 2px;
+}
+
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -127,4 +540,66 @@ html.lenis, html.lenis body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+
+/* Extra small devices (320px - 375px) */
+@media (max-width: 375px) {
+  /* Ultra compact spacing */
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  /* Smaller text on tiny screens */
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+  
+  .text-4xl {
+    font-size: 1.875rem;
+  }
+  
+  /* Compact buttons */
+  .btn-editorial {
+    padding: 0.75rem 1rem;
+    font-size: 10px;
+  }
+  
+  /* Reduce gaps */
+  .gap-4 {
+    gap: 0.75rem;
+  }
+  
+  .space-y-6 {
+    gap: 1rem;
+  }
+}
+
+/* Large desktop (1920px+) */
+@media (min-width: 1920px) {
+  /* Max content width */
+  .max-w-7xl {
+    max-width: 90rem;
+  }
+  
+  /* Larger text on big screens */
+  .editorial-headline {
+    letter-spacing: -0.03em;
+  }
+  
+  /* More generous spacing */
+  section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* Fluid typography for all screens */
+.editorial-headline {
+  font-size: clamp(1.75rem, 5vw, 4rem);
+}
+
+.editorial-tag {
+  font-size: clamp(10px, 1.5vw, 11px);
 }

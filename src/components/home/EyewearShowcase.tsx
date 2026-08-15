@@ -26,21 +26,36 @@ export function EyewearShowcase() {
       : PRODUCTS_DATA.filter((p) => p.category === activeCategory);
 
   return (
-    <section className="py-24 sm:py-32 bg-ivory relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <section className="py-24 sm:py-32 bg-ivory relative overflow-hidden">
+      {/* Subtle Decorative Background */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-accent-gold/8 to-transparent rounded-full blur-3xl opacity-60" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-accent-terracotta/6 to-transparent rounded-full blur-3xl opacity-60" />
+      
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between pb-12 border-b border-sand-border gap-6">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
             <span className="editorial-tag text-accent-terracotta block mb-2">
               PRODUK & KURASI
             </span>
             <h2 className="editorial-headline text-3xl sm:text-5xl text-charcoal">
               Koleksi Kacamata & Lensa
             </h2>
-          </div>
+          </motion.div>
 
           {/* Category Switcher with animated pill background */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <motion.div 
+            className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             {categories.map((cat) => {
               const isActive = activeCategory === cat.id;
               return (
@@ -54,7 +69,7 @@ export function EyewearShowcase() {
                   {isActive && (
                     <motion.div
                       layoutId="activeCategoryPill"
-                      className="absolute inset-0 bg-charcoal -z-10 shadow-xs"
+                      className="absolute inset-0 bg-charcoal -z-10 shadow-sm"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
@@ -65,7 +80,7 @@ export function EyewearShowcase() {
                 </button>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
         {/* Animated Product Grid */}
@@ -82,19 +97,20 @@ export function EyewearShowcase() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.92 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -6 }}
-                className="group flex flex-col justify-between bg-ivory-warm border border-sand-border/80 p-6 transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.05)] hover:border-charcoal/30 relative"
+                className="group flex flex-col justify-between bg-ivory-warm border border-sand-border/80 p-6 transition-all duration-500 hover:shadow-medium hover:border-charcoal/30 hover:-translate-y-2 relative overflow-hidden"
               >
+                {/* Hover Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/0 via-transparent to-accent-terracotta/0 group-hover:from-accent-gold/5 group-hover:to-accent-terracotta/5 transition-all duration-500 pointer-events-none" />
                 {/* Top Meta */}
-                <div className="flex items-center justify-between text-[11px] uppercase tracking-wider text-charcoal-light pb-4">
+                <div className="flex items-center justify-between text-[11px] uppercase tracking-wider text-charcoal-light pb-4 relative z-10">
                   <span>{product.categoryLabel}</span>
-                  <span className="text-[10px] tracking-wider text-charcoal-muted font-medium">
+                  <span className="text-[10px] tracking-wider text-charcoal-muted font-medium px-2 py-1 bg-sand/40 group-hover:bg-accent-gold/20 transition-colors">
                     {product.type}
                   </span>
                 </div>
 
                 {/* Product Visual with Zoom on Hover */}
-                <div className="relative aspect-[4/3] w-full my-4 overflow-hidden bg-ivory flex items-center justify-center p-4 border border-sand-border/30">
+                <div className="relative aspect-[4/3] w-full my-4 overflow-hidden bg-ivory flex items-center justify-center p-4 border border-sand-border/30 group-hover:border-accent-terracotta/30 transition-colors relative z-10">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -102,6 +118,10 @@ export function EyewearShowcase() {
                     className="object-contain p-4 group-hover:scale-110 transition-transform duration-700 ease-editorial"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
+                  {/* Sparkle icon on hover */}
+                  <div className="absolute top-3 right-3 bg-ivory/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Sparkles className="w-4 h-4 text-accent-gold" />
+                  </div>
                 </div>
 
                 {/* Product Info */}

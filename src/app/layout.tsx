@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { Preloader } from "@/components/ui/Preloader";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 const sansFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${sansFont.variable}`}>
       <body className="bg-ivory text-charcoal antialiased selection:bg-sand selection:text-charcoal font-sans">
+        <ScrollProgress />
         <Preloader />
         <SmoothScroll>
           <CustomCursor />

@@ -10,8 +10,10 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { ArrowRight, MapPin, Sparkles, ChevronDown } from "lucide-react";
+import { ArrowRight, MapPin, Sparkles, ChevronDown, Award, Users, Eye } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { FloatingElements } from "@/components/ui/FloatingElements";
+import { GradientOrb } from "@/components/ui/GradientOrb";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
 
 export function Hero() {
@@ -84,11 +86,16 @@ export function Hero() {
     >
       {/* Sticky Viewport Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* Subtle Ambient Editorial Grid Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[linear-gradient(to_right,#171715_1px,transparent_1px),linear-gradient(to_bottom,#171715_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        {/* Cleaner Ambient Background Effects */}
+        <FloatingElements count={8} />
+        <GradientOrb size="xl" color="gold" position={{ top: "20%", left: "10%" }} blur="heavy" />
+        <GradientOrb size="lg" color="sand" position={{ bottom: "20%", right: "15%" }} blur="heavy" />
+        
+        {/* Subtle Editorial Grid Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.015] bg-[linear-gradient(to_right,#171715_1px,transparent_1px),linear-gradient(to_bottom,#171715_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        {/* Ambient Soft Glow Orbs */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-sand/35 blur-[120px] pointer-events-none" />
+        {/* Subtle Central Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-sand/20 blur-[100px] pointer-events-none animate-pulse-glow" />
 
         {/* ======================================================== */}
         {/* STAGE 1: SOFI-STYLE CLEAN CINEMATIC WELCOME              */}
@@ -102,19 +109,19 @@ export function Hero() {
           }}
           className="absolute inset-0 flex flex-col items-center justify-between pt-28 pb-12 px-6 sm:px-12 z-20 overflow-hidden"
         >
-          {/* Subtle Ambient Optical Rings in Background */}
+          {/* Subtle Ambient Optical Rings in Background - Refined */}
           <motion.div
             style={{ x: ringX, y: ringY }}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 sm:opacity-30"
+            className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-15 sm:opacity-20"
           >
-            <div className="relative w-[320px] h-[320px] sm:w-[540px] sm:h-[540px] rounded-full border border-charcoal/20 flex items-center justify-center">
+            <div className="relative w-[280px] h-[280px] sm:w-[480px] sm:h-[480px] rounded-full border border-charcoal/10 flex items-center justify-center">
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                className="w-[84%] h-[84%] rounded-full border border-dashed border-accent-terracotta/30"
+                transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+                className="w-[84%] h-[84%] rounded-full border border-dashed border-accent-terracotta/20"
               />
-              <div className="absolute w-full h-[1px] bg-charcoal/10" />
-              <div className="absolute h-full w-[1px] bg-charcoal/10" />
+              <div className="absolute w-full h-[0.5px] bg-charcoal/5" />
+              <div className="absolute h-full w-[0.5px] bg-charcoal/5" />
             </div>
           </motion.div>
 
@@ -123,15 +130,16 @@ export function Hero() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-sand/40 border border-sand-border text-[11px] uppercase tracking-[0.24em] text-charcoal-muted z-10"
+            className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 rounded-full bg-sand/40 border border-sand-border text-[10px] sm:text-[11px] uppercase tracking-[0.20em] sm:tracking-[0.24em] text-charcoal-muted z-10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-accent-terracotta animate-pulse" />
-            <span>Optik Ezia • Indonesian Eyewear & Eye Care</span>
+            <span className="hidden sm:inline">Optik Ezia • Indonesian Eyewear & Eye Care</span>
+            <span className="sm:hidden">Optik Ezia</span>
           </motion.div>
 
-          {/* Grand Clean 3D Typography */}
+          {/* Grand Clean 3D Typography - Responsive */}
           <div
-            className="my-auto flex flex-col items-center justify-center text-center select-none z-10"
+            className="my-auto flex flex-col items-center justify-center text-center select-none z-10 px-4"
             style={{ perspective: 1000 }}
           >
             <motion.div
@@ -142,32 +150,32 @@ export function Hero() {
                 y: welcomeTranslateY,
                 transformStyle: "preserve-3d",
               }}
-              className="space-y-4 will-change-transform flex flex-col items-center"
+              className="space-y-2 sm:space-y-4 will-change-transform flex flex-col items-center"
             >
-              {/* Grand Elegant Title */}
+              {/* Grand Elegant Title - Responsive Text Size */}
               <div style={{ transform: "translateZ(50px)" }}>
-                <h1 className="editorial-headline text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-charcoal tracking-tight font-extralight uppercase leading-none">
+                <h1 className="editorial-headline text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-charcoal tracking-tight font-extralight uppercase leading-none">
                   EZIA OPTICAL
                 </h1>
               </div>
 
-              {/* Subtitle Tagline */}
+              {/* Subtitle Tagline - Responsive */}
               <div style={{ transform: "translateZ(25px)" }}>
-                <p className="text-xs sm:text-sm md:text-base font-light tracking-[0.32em] uppercase text-accent-terracotta">
+                <p className="text-[10px] sm:text-xs md:text-sm font-light tracking-[0.28em] sm:tracking-[0.32em] uppercase text-accent-terracotta px-4">
                   Modern Eyewear • Precision Eye Care
                 </p>
               </div>
             </motion.div>
           </div>
 
-          {/* Bottom Clean Scroll Indicator */}
+          {/* Bottom Clean Scroll Indicator - Hide on Small Mobile */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="flex flex-col items-center space-y-2 text-charcoal-muted z-10"
+            className="hidden sm:flex flex-col items-center space-y-2 text-charcoal-muted z-10"
           >
-            <span className="text-[10px] uppercase tracking-[0.25em] font-medium font-mono text-charcoal-light">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] font-medium font-mono text-charcoal-light">
               GULIR KE BAWAH UNTUK MENJELAJAH
             </span>
             <motion.div
@@ -195,45 +203,45 @@ export function Hero() {
           }}
           className="absolute inset-0 flex items-center justify-center px-6 sm:px-8 lg:px-12 z-30"
         >
-          <div className="max-w-7xl mx-auto w-full pt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+          <div className="max-w-7xl mx-auto w-full pt-8 sm:pt-12 lg:pt-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               {/* Left Editorial Copy */}
-              <div className="lg:col-span-7 flex flex-col justify-center space-y-7">
+              <div className="lg:col-span-7 flex flex-col justify-center space-y-5 sm:space-y-7 px-4 sm:px-0">
                 {/* Tagline Badge */}
-                <div className="inline-flex items-center gap-3">
-                  <span className="w-8 h-[1px] bg-charcoal/40" />
-                  <span className="editorial-tag text-charcoal-muted">
+                <div className="inline-flex items-center gap-2 sm:gap-3">
+                  <span className="w-6 sm:w-8 h-[1px] bg-charcoal/40" />
+                  <span className="editorial-tag text-charcoal-muted text-[10px] sm:text-[11px]">
                     {OPTIK_EZIA_CONFIG.tagline}
                   </span>
                 </div>
 
-                {/* Oversized Headline */}
+                {/* Oversized Headline - More Responsive */}
                 <div className="space-y-1">
-                  <h2 className="editorial-headline text-4xl sm:text-6xl xl:text-7xl font-light text-charcoal">
+                  <h2 className="editorial-headline text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-charcoal leading-tight">
                     SEE THE WORLD
                   </h2>
-                  <h2 className="editorial-headline text-4xl sm:text-6xl xl:text-7xl font-normal italic text-charcoal/85 font-serif">
+                  <h2 className="editorial-headline text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal italic text-charcoal/85 font-serif leading-tight">
                     DIFFERENTLY.
                   </h2>
                 </div>
 
                 {/* Supporting Copy */}
-                <p className="text-base sm:text-lg font-light text-charcoal-muted max-w-xl leading-relaxed">
+                <p className="text-sm sm:text-base lg:text-lg font-light text-charcoal-muted max-w-xl leading-relaxed">
                   Optik Ezia menghadirkan kurasi kacamata, frame, lensa,
                   sunglasses, dan softlens pilihan dengan layanan pemeriksaan
                   mata serta fitting yang nyaman dan terpercaya.
                 </p>
 
-                {/* Action CTAs */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                {/* Action CTAs - Full Width on Mobile */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
                   <MagneticButton strength={0.25}>
                     <Link
                       href="/stores"
-                      className="btn-editorial-primary group w-full sm:w-auto shadow-xs"
+                      className="btn-editorial-primary group w-full sm:w-auto shadow-sm justify-center"
                       data-cursor-text="LOKASI"
                     >
                       <MapPin className="w-4 h-4 text-accent-gold" />
-                      <span>Cari Cabang Terdekat</span>
+                      <span className="text-[10px] sm:text-xs">Cari Cabang Terdekat</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </MagneticButton>
@@ -241,46 +249,70 @@ export function Hero() {
                   <MagneticButton strength={0.2}>
                     <Link
                       href="/collection"
-                      className="btn-editorial-outline group w-full sm:w-auto"
+                      className="btn-editorial-outline group w-full sm:w-auto justify-center"
                       data-cursor-text="KOLEKSI"
                     >
-                      <span>Lihat Koleksi Eyewear</span>
+                      <span className="text-[10px] sm:text-xs">Lihat Koleksi Eyewear</span>
                       <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                     </Link>
                   </MagneticButton>
                 </div>
 
-                {/* Value Highlights */}
-                <div className="pt-6 border-t border-sand-border grid grid-cols-3 gap-6 text-charcoal-muted">
-                  <div>
-                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">
-                      Pemeriksaan
-                    </span>
-                    <span className="text-[11px] text-charcoal-light">
+                {/* Value Highlights - 2 cols on mobile, 3 on larger */}
+                <div className="pt-4 sm:pt-6 border-t border-sand-border grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 text-charcoal-muted">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="group"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <Eye className="w-3 sm:w-4 h-3 sm:h-4 text-accent-terracotta" />
+                      <span className="block text-xs sm:text-sm font-semibold text-charcoal tracking-wide uppercase">
+                        Pemeriksaan
+                      </span>
+                    </div>
+                    <span className="text-[10px] sm:text-[11px] text-charcoal-light">
                       Evaluasi refraksi mata
                     </span>
-                  </div>
-                  <div>
-                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">
-                      Kurasi Frame
-                    </span>
-                    <span className="text-[11px] text-charcoal-light">
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="group"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <Award className="w-3 sm:w-4 h-3 sm:h-4 text-accent-gold" />
+                      <span className="block text-xs sm:text-sm font-semibold text-charcoal tracking-wide uppercase">
+                        Kurasi Frame
+                      </span>
+                    </div>
+                    <span className="text-[10px] sm:text-[11px] text-charcoal-light">
                       Berbagai model & gaya
                     </span>
-                  </div>
-                  <div>
-                    <span className="block text-sm font-semibold text-charcoal tracking-wide uppercase">
-                      Fitting Nyaman
-                    </span>
-                    <span className="text-[11px] text-charcoal-light">
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="group col-span-2 sm:col-span-1"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <Users className="w-3 sm:w-4 h-3 sm:h-4 text-accent-olive" />
+                      <span className="block text-xs sm:text-sm font-semibold text-charcoal tracking-wide uppercase">
+                        Fitting Nyaman
+                      </span>
+                    </div>
+                    <span className="text-[10px] sm:text-[11px] text-charcoal-light">
                       Penyesuaian proporsi wajah
                     </span>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
 
-              {/* Right Cinematic Editorial Showcase Card */}
-              <div className="lg:col-span-5 relative">
+              {/* Right Cinematic Editorial Showcase Card - Hidden on Small Mobile */}
+              <div className="hidden md:block lg:col-span-5 relative px-4 sm:px-0">
                 <motion.div
                   style={{
                     rotateX: cardRotateX,

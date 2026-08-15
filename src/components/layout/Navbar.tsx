@@ -34,7 +34,7 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-[#FAF8F5]/92 backdrop-blur-md py-3.5 border-b border-sand-border/60 shadow-[0_4px_24px_rgba(0,0,0,0.03)]"
+            ? "glass-effect py-3.5 border-b border-sand-border/60 shadow-soft"
             : "bg-transparent py-5 sm:py-6"
         }`}
       >
@@ -42,9 +42,9 @@ export function Navbar() {
           {/* Brand Logo with Image */}
           <Link
             href="/"
-            className="group flex items-center gap-3.5 focus:outline-none"
+            className="group flex items-center gap-3.5 focus:outline-none relative"
           >
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-md overflow-hidden border border-charcoal/20 shadow-xs bg-black group-hover:scale-105 transition-transform duration-300">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-md overflow-hidden border border-charcoal/20 shadow-sm bg-black group-hover:scale-105 group-hover:shadow-medium transition-all duration-300">
               <Image
                 src="/images/logo.png"
                 alt="Optik Ezia Logo"
@@ -52,9 +52,11 @@ export function Navbar() {
                 className="object-cover"
                 priority
               />
+              {/* Shine effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-full group-hover:translate-x-full" />
             </div>
             <div className="flex flex-col items-start">
-              <span className="text-lg sm:text-xl font-light tracking-[0.22em] uppercase text-charcoal font-display group-hover:opacity-85 transition-opacity">
+              <span className="text-lg sm:text-xl font-light tracking-[0.22em] uppercase text-charcoal font-display group-hover:text-accent-terracotta transition-colors">
                 {OPTIK_EZIA_CONFIG.name}
               </span>
               <span className="text-[8px] uppercase tracking-[0.28em] text-charcoal-muted -mt-0.5">
@@ -90,12 +92,14 @@ export function Navbar() {
           <div className="flex items-center space-x-4">
             <Link
               href="/stores"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-none bg-charcoal text-ivory text-[11px] font-semibold uppercase tracking-[0.16em] hover:bg-charcoal-deep active:scale-95 transition-all group shadow-xs"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-none bg-charcoal text-ivory text-[11px] font-semibold uppercase tracking-[0.16em] hover:bg-charcoal-deep hover:shadow-medium active:scale-95 transition-all group shadow-sm relative overflow-hidden"
               data-cursor-text="LOKASI"
             >
-              <MapPin className="w-3.5 h-3.5 text-accent-gold" />
-              <span>Cari Cabang</span>
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              {/* Button shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-full group-hover:translate-x-full" />
+              <MapPin className="w-3.5 h-3.5 text-accent-gold relative z-10" />
+              <span className="relative z-10">Cari Cabang</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform relative z-10" />
             </Link>
 
             {/* Mobile Menu Button */}
