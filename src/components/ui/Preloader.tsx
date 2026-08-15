@@ -19,7 +19,7 @@ export function Preloader() {
       return;
     }
 
-    // Smooth progress animation
+    // Ultra smooth progress animation
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -27,20 +27,20 @@ export function Preloader() {
           // Wait a bit at 100% then start exit animation
           setTimeout(() => {
             setIsLoading(false);
-          }, 600);
+          }, 800); // Increased wait time for better feeling
           return 100;
         }
-        // Smooth non-linear increment for organic feel
-        const increment = Math.floor(Math.random() * 8) + 4;
+        // Smoother increment with smaller steps
+        const increment = Math.floor(Math.random() * 6) + 3;
         return Math.min(prev + increment, 100);
       });
-    }, 50);
+    }, 60); // Slightly slower for smoother feel
 
     return () => clearInterval(interval);
   }, []);
 
-  // Super smooth curtain ease - perfect for upward motion
-  const curtainEase = [0.76, 0, 0.24, 1]; // easeInOutQuart
+  // Ultra smooth curtain ease - butter smooth!
+  const curtainEase = [0.83, 0, 0.17, 1]; // easeInOutQuint - even smoother!
 
   return (
     <AnimatePresence mode="wait">
@@ -50,7 +50,7 @@ export function Preloader() {
           exit={{ 
             y: "-100%",
             transition: {
-              duration: 1.2,
+              duration: 1.5, // Increased duration for ultra smooth
               ease: curtainEase,
             }
           }}
@@ -134,101 +134,103 @@ export function Preloader() {
 
             {/* Centerpiece - Logo & Typography */}
             <div className="flex flex-col items-center justify-center my-auto space-y-8 text-center">
-              {/* Pulsing Logo with Glow */}
+              {/* Pulsing Logo with Glow - More Symmetric */}
               <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
+                initial={{ scale: 0.85, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1, ease: curtainEase }}
-                className="relative"
+                className="relative flex items-center justify-center"
               >
-                {/* Outer Glow Ring */}
+                {/* Outer Glow Ring - Perfectly Centered */}
                 <motion.div
                   animate={{
-                    scale: [1, 1.15, 1],
-                    opacity: [0.3, 0.5, 0.3],
+                    scale: [1, 1.12, 1],
+                    opacity: [0.25, 0.4, 0.25],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 3.5,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className="absolute inset-0 -m-8 bg-accent-gold/20 rounded-full blur-3xl"
+                  className="absolute inset-0 -m-10 bg-accent-gold/20 rounded-full blur-3xl"
                 />
 
-                {/* Logo Container */}
-                <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-2 border-ivory/20 shadow-2xl bg-gradient-to-br from-charcoal to-black">
-                  <Image
-                    src="/images/logo.png"
-                    alt="Ezia Optical Logo"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+                {/* Logo Container - Perfect Square */}
+                <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-2 border-ivory/20 shadow-2xl bg-gradient-to-br from-charcoal to-black flex items-center justify-center">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src="/images/logo.png"
+                      alt="Ezia Optical Logo"
+                      fill
+                      className="object-contain p-2"
+                      priority
+                    />
+                  </div>
                   
-                  {/* Shine Effect */}
+                  {/* Shine Effect - Slower and More Subtle */}
                   <motion.div
                     animate={{
-                      x: ["-100%", "200%"],
+                      x: ["-150%", "250%"],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      repeatDelay: 2,
+                      ease: "easeInOut",
+                    }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent skew-x-12"
+                  />
+
+                  {/* Pulsing Overlay - More Subtle */}
+                  <motion.div
+                    animate={{
+                      opacity: [0.05, 0.15, 0.05],
                     }}
                     transition={{
                       duration: 3,
                       repeat: Infinity,
-                      repeatDelay: 1,
                       ease: "easeInOut",
                     }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
-                  />
-
-                  {/* Pulsing Overlay */}
-                  <motion.div
-                    animate={{
-                      opacity: [0.1, 0.3, 0.1],
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="absolute inset-0 bg-gradient-to-br from-accent-gold/30 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-br from-accent-gold/20 to-transparent"
                   />
                 </div>
               </motion.div>
 
-              {/* Brand Typography */}
+              {/* Brand Typography - More Balanced */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3, ease: curtainEase }}
-                className="space-y-3"
+                transition={{ duration: 0.9, delay: 0.3, ease: curtainEase }}
+                className="space-y-4 flex flex-col items-center"
               >
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-[0.35em] uppercase text-ivory font-display">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-[0.35em] uppercase text-ivory font-display text-center">
                   OPTIK EZIA
                 </h2>
-                <div className="h-[1px] w-24 mx-auto bg-gradient-to-r from-transparent via-accent-gold/50 to-transparent" />
-                <p className="text-[11px] sm:text-xs uppercase tracking-[0.28em] text-ivory/50 font-light">
+                <div className="h-[1px] w-28 bg-gradient-to-r from-transparent via-accent-gold/60 to-transparent" />
+                <p className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-ivory/50 font-light text-center">
                   Precision Eyewear × Eye Care
                 </p>
               </motion.div>
 
-              {/* Loading Indicator */}
+              {/* Loading Indicator - Smoother */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="flex items-center gap-2"
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="flex items-center gap-2.5 justify-center"
               >
                 <motion.div
                   animate={{
                     rotate: 360,
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 2.5,
                     repeat: Infinity,
                     ease: "linear",
                   }}
-                  className="w-5 h-5 border-2 border-accent-gold/30 border-t-accent-gold rounded-full"
+                  className="w-5 h-5 border-2 border-accent-gold/20 border-t-accent-gold rounded-full"
                 />
-                <span className="text-[10px] uppercase tracking-[0.25em] text-ivory/40">
+                <span className="text-[10px] uppercase tracking-[0.26em] text-ivory/40 font-light">
                   Memuat Pengalaman
                 </span>
               </motion.div>
