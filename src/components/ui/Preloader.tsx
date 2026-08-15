@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export function Preloader() {
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useEffect(() => {
     // Check if user prefers reduced motion
@@ -18,6 +19,12 @@ export function Preloader() {
       setIsLoading(false);
       return;
     }
+
+    // Preload logo image first
+    const img = new window.Image();
+    img.src = "/images/logo.png";
+    img.onload = () => setIsImageLoaded(true);
+    img.onerror = () => setIsImageLoaded(true); // Continue even if image fails
 
     // Ultra smooth progress animation
     const interval = setInterval(() => {
@@ -36,7 +43,15 @@ export function Preloader() {
       });
     }, 60); // Slightly slower for smoother feel
 
-    return () => clearInterval(interval);
+    // Safety timeout - force complete after 5 seconds
+    const safetyTimeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(safetyTimeout);
+    };
   }, []);
 
   // Ultra smooth curtain ease - butter smooth!
@@ -54,14 +69,15 @@ export function Preloader() {
               ease: curtainEase,
             }
           }}
-          className="fixed inset-0 z-[99999] bg-gradient-to-br from-[#1a1816] via-[#121210] to-[#0a0a08] overflow-hidden"
+          className="fixed inset-0 z-[99999] bg-gradient-to-br from-[#1a1816] via-[#121210] to-[#0a0a08] overflow-hidden touch-none"
+          style={{ WebkitOverflowScrolling: 'touch' }}
         >
-          {/* Animated Grid Background */}
-          <div className="absolute inset-0 opacity-[0.03]">
+          {/* Animated Grid Background - Hidden on small mobile */}
+          <div className="absolute inset-0 opacity-[0.03] hidden xs:block">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem]" />
           </div>
 
-          {/* Ambient Glow Orbs */}
+          {/* Ambient Glow Orbs - Simplified on mobile */}
           <motion.div
             animate={{
               scale: [1, 1.2, 1],
@@ -72,7 +88,7 @@ export function Preloader() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-gold/20 rounded-full blur-[120px]"
+            className="absolute top-1/4 left-1/4 w-64 h-64 xs:w-96 xs:h-96 bg-accent-gold/20 rounded-full blur-[80px] xs:blur-[120px]"
           />
           <motion.div
             animate={{
@@ -85,7 +101,7 @@ export function Preloader() {
               ease: "easeInOut",
               delay: 1,
             }}
-            className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-terracotta/15 rounded-full blur-[100px]"
+            className="absolute bottom-1/4 right-1/4 w-56 h-56 xs:w-80 xs:h-80 bg-accent-terracotta/15 rounded-full blur-[60px] xs:blur-[100px]"
           />
 
           {/* Main Content - Will slide up with the curtain */}
@@ -93,7 +109,7 @@ export function Preloader() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="relative h-full flex flex-col justify-between p-6 sm:p-12 lg:p-16 select-none"
+            className="relative h-full flex flex-col justify-between p-4 xs:p-6 sm:p-12 lg:p-16 select-none"
           >
             {/* Top Brand Bar */}
             <div className="flex items-center justify-between">
@@ -156,18 +172,25 @@ export function Preloader() {
                 />
 
                 {/* Logo Container - Perfect Square */}
-                <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-2 border-ivory/20 shadow-2xl bg-gradient-to-br from-charcoal to-black flex items-center justify-center">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src="/images/logo.png"
-                      alt="Ezia Optical Logo"
-                      fill
-                      className="object-contain p-2"
-                      priority
-                    />
+                <div className="relative w-32 h-32 xs:w-36 xs:h-36 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-2 border-ivory/20 shadow-2xl bg-gradient-to-br from-charcoal to-black flex items-center justify-center">
+                  <div className="relative w-full h-full p-2">
+                    {isImageLoaded ? (
+                      <Image
+                        src="/images/logo.png"
+                        alt="Ezia Optical Logo"
+                        fill
+                        className="object-contain"
+                        priority
+                        sizes="(max-width: 375px) 128px, (max-width: 640px) 144px, 160px"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="w-16 h-16 border-4 border-accent-gold/20 border-t-accent-gold rounded-full animate-spin" />
+                      </div>
+                    )}
                   </div>
                   
-                  {/* Shine Effect - Slower and More Subtle */}
+                  {/* Shine Effect - Slower and More Subtle, hidden on mobile */}
                   <motion.div
                     animate={{
                       x: ["-150%", "250%"],
@@ -178,7 +201,7 @@ export function Preloader() {
                       repeatDelay: 2,
                       ease: "easeInOut",
                     }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent skew-x-12"
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent skew-x-12 hidden xs:block"
                   />
 
                   {/* Pulsing Overlay - More Subtle */}
@@ -191,7 +214,7 @@ export function Preloader() {
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className="absolute inset-0 bg-gradient-to-br from-accent-gold/20 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-br from-accent-gold/20 to-transparent hidden xs:block"
                   />
                 </div>
               </motion.div>
