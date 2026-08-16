@@ -3,20 +3,41 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, MapPin, X, Instagram } from "lucide-react";
+import { ArrowRight, Check, MapPin, X, Instagram, Sparkles, Compass, ShieldCheck } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS_DATA, EyewearProduct } from "@/data/products";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 export default function CollectionPage() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [selectedProduct, setSelectedProduct] = useState<EyewearProduct | null>(null);
 
   const categories = [
-    { id: "all", label: "Semua Koleksi" },
+    { id: "all", label: "Semua Lini Kurasi" },
     { id: "optical", label: "Frame Optikal" },
-    { id: "sunglasses", label: "Kacamata Hitam" },
-    { id: "lenses", label: "Lensa Kacamata" },
-    { id: "softlens", label: "Softlens" },
+    { id: "sunglasses", label: "Sunglasses UV400" },
+    { id: "lenses", label: "Lensa Berstandar" },
+    { id: "softlens", label: "Softlens Bersertifikasi" },
+  ];
+
+  const faceShapeGuides = [
+    {
+      shape: "Wajah Bulat (Round)",
+      recommendation: "Frame Persegi, Wayfarer, atau Geometris bersudut tegas untuk mempertegas siluet wajah.",
+    },
+    {
+      shape: "Wajah Kotak (Square)",
+      recommendation: "Frame Bulat, Oval, atau Cat-Eye dengan garis kurva lembut untuk menyeimbangkan garis rahang.",
+    },
+    {
+      shape: "Wajah Oval",
+      recommendation: "Hampir semua siluet bingkai cocok, terutama model Aviator, Panthos, dan Rectangle proporsional.",
+    },
+    {
+      shape: "Wajah Hati (Heart)",
+      recommendation: "Frame Tipis Ringan, Rimless, atau Oval yang menyeimbangkan dahi lebar dan dagu ramping.",
+    },
   ];
 
   const filteredProducts =
@@ -28,16 +49,41 @@ export default function CollectionPage() {
     <div className="pt-28 pb-32 bg-ivory">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Page Header */}
-        <div className="max-w-3xl pb-12 border-b border-sand-border">
+        <div className="max-w-4xl pb-12 border-b border-sand-border">
           <span className="editorial-tag text-accent-terracotta block mb-3">
-            KATALOG PRODUK
+            PORTOFOLIO KURASI & KERAJINAN MATERIAL
           </span>
-          <h1 className="editorial-headline text-4xl sm:text-6xl text-charcoal">
-            Koleksi Frame, Lensa & Sunglasses
-          </h1>
-          <p className="text-base sm:text-lg font-light text-charcoal-muted mt-4 leading-relaxed">
-            Pilihan model kacamata optikal harian, sunglasses pelindung UV, lensa anti-radiasi, dan softlens. Temukan koleksi yang sesuai dengan kebutuhan penglihatan dan gaya personal Anda.
+          <TextReveal
+            as="h1"
+            text="Kurasi Bingkai, Lensa & Pelindung UV Optik Ezia"
+            className="editorial-headline text-4xl sm:text-6xl text-charcoal"
+          />
+          <p className="text-base sm:text-lg font-light text-charcoal-muted mt-5 leading-relaxed">
+            Setiap model bingkai dan lensa dalam etalase Optik Ezia dipilih berdasarkan kenyamanan ergonomis, kekuatan material (Titanium, Italian Acetate, Ultralight TR90), serta kemampuan adaptasi resep refraksi yang akurat.
           </p>
+        </div>
+
+        {/* Face Shape Consultation Guide */}
+        <div className="py-14 border-b border-sand-border">
+          <div className="flex items-center gap-3 mb-6">
+            <Compass className="w-5 h-5 text-accent-terracotta" />
+            <h2 className="text-xs uppercase tracking-[0.2em] font-semibold text-charcoal">
+              Panduan Pemilihan Frame Sesuai Bentuk Wajah
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {faceShapeGuides.map((guide, idx) => (
+              <div key={idx} className="p-6 bg-ivory-warm border border-sand-border">
+                <span className="text-xs font-semibold text-charcoal uppercase tracking-wider block mb-2 font-display">
+                  {guide.shape}
+                </span>
+                <p className="text-xs text-charcoal-muted font-light leading-relaxed">
+                  {guide.recommendation}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Category Filters */}
@@ -63,7 +109,7 @@ export default function CollectionPage() {
             <div
               key={product.id}
               id={product.id}
-              className="bg-ivory-warm border border-sand-border p-6 flex flex-col justify-between group hover:border-charcoal/40 transition-all duration-300"
+              className="bg-ivory-warm border border-sand-border p-6 flex flex-col justify-between group hover:border-charcoal/40 transition-all duration-300 hover-lift"
             >
               <div>
                 {/* Meta */}
@@ -75,7 +121,7 @@ export default function CollectionPage() {
                 </div>
 
                 {/* Main Product Image */}
-                <div className="relative aspect-[4/3] w-full my-6 bg-ivory flex items-center justify-center p-4 border border-sand-border/40">
+                <div className="relative aspect-[4/3] w-full my-6 bg-ivory flex items-center justify-center p-4 border border-sand-border/40 overflow-hidden">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -90,7 +136,7 @@ export default function CollectionPage() {
                     {product.name}
                   </h3>
 
-                  <p className="text-xs text-charcoal-muted leading-relaxed">
+                  <p className="text-xs text-charcoal-muted leading-relaxed font-light">
                     {product.description}
                   </p>
 
@@ -113,94 +159,131 @@ export default function CollectionPage() {
                   onClick={() => setSelectedProduct(product)}
                   className="flex-1 py-2.5 px-3 border border-charcoal/20 text-charcoal text-xs uppercase tracking-wider font-semibold hover:bg-sand transition-colors text-center"
                 >
-                  Detail Info
+                  Spesifikasi
                 </button>
 
                 <Link
                   href="/stores"
                   className="flex-1 py-2.5 px-3 bg-charcoal text-ivory text-xs uppercase tracking-wider font-semibold hover:bg-charcoal-deep transition-colors text-center"
                 >
-                  Cek di Cabang
+                  Fitting Cabang
                 </Link>
               </div>
             </div>
           ))}
         </div>
+
+        {/* In-Store Fitting Note */}
+        <div className="mt-20 p-8 sm:p-10 bg-ivory-warm border border-sand-border text-center space-y-4">
+          <span className="editorial-tag text-accent-terracotta">
+            PENGALAMAN FITTING LANGSUNG
+          </span>
+          <h3 className="editorial-headline text-2xl sm:text-3xl text-charcoal max-w-xl mx-auto">
+            Rasakan Kenyamanan Material di Seluruh Cabang Kami
+          </h3>
+          <p className="text-xs sm:text-sm text-charcoal-muted max-w-lg mx-auto leading-relaxed font-light">
+            Setiap model bingkai dapat dicoba secara langsung di outlet resmi Optik Ezia dengan panduan penyesuaian sudut hidung dan telinga oleh staf ahli kami.
+          </p>
+          <div className="pt-2">
+            <Link href="/stores" className="btn-editorial-primary inline-flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-accent-gold" />
+              <span>Temukan Outlet Terdekat</span>
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Product Detail Modal */}
-      {selectedProduct && (
-        <div className="fixed inset-0 z-50 bg-charcoal/70 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6">
-          <div className="bg-ivory max-w-2xl w-full border border-sand-border p-6 sm:p-8 max-h-[90vh] overflow-y-auto relative">
-            <button
+      <AnimatePresence>
+        {selectedProduct && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setSelectedProduct(null)}
-              className="absolute top-6 right-6 p-2 text-charcoal hover:bg-sand rounded-full transition-colors"
-              aria-label="Tutup Detail"
+              className="absolute inset-0 bg-black/65 cursor-pointer"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-ivory max-w-2xl w-full border border-sand-border p-6 sm:p-8 max-h-[90vh] overflow-y-auto relative z-10 will-change-transform transform-gpu shadow-2xl"
             >
-              <X className="w-5 h-5" />
-            </button>
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-6 right-6 p-2 text-charcoal hover:bg-sand rounded-full transition-colors"
+                aria-label="Tutup Detail"
+              >
+                <X className="w-5 h-5" />
+              </button>
 
-            <div className="space-y-6">
-              <div className="relative aspect-[16/10] w-full bg-ivory-warm border border-sand-border">
-                <Image
-                  src={selectedProduct.lifestyleImage || selectedProduct.image}
-                  alt={selectedProduct.name}
-                  fill
-                  className="object-cover"
-                />
+              <div className="space-y-6">
+                <div className="relative aspect-[16/10] w-full bg-ivory-warm border border-sand-border">
+                  <Image
+                    src={selectedProduct.lifestyleImage || selectedProduct.image}
+                    alt={selectedProduct.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                <div>
+                  <span className="editorial-tag text-accent-terracotta block mb-1">
+                    {selectedProduct.categoryLabel}
+                  </span>
+                  <h3 className="text-2xl font-light text-charcoal font-display">
+                    {selectedProduct.name}
+                  </h3>
+                </div>
+
+                <p className="text-sm font-light text-charcoal-muted leading-relaxed">
+                  {selectedProduct.description}
+                </p>
+
+                {/* Feature Points */}
+                <div className="space-y-2 border-t border-sand-border pt-4">
+                  <h4 className="text-xs uppercase tracking-wider font-semibold text-charcoal mb-2">
+                    Karakteristik & Material
+                  </h4>
+                  <ul className="space-y-2 text-xs text-charcoal-muted">
+                    {selectedProduct.features?.map((feat, idx) => (
+                      <li key={idx} className="flex items-center gap-2">
+                        <Check className="w-3.5 h-3.5 text-accent-terracotta shrink-0" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="pt-4 border-t border-sand-border flex flex-col sm:flex-row gap-3">
+                  <Link
+                    href="/stores"
+                    className="btn-editorial-primary flex-1 text-center"
+                  >
+                    <MapPin className="w-4 h-4 text-accent-gold" />
+                    <span>Kunjungi Cabang Terdekat</span>
+                  </Link>
+
+                  <a
+                    href={OPTIK_EZIA_CONFIG.instagram.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-editorial-outline flex-1 text-center"
+                  >
+                    <Instagram className="w-4 h-4 text-accent-terracotta" />
+                    <span>Konsultasi Instagram</span>
+                  </a>
+                </div>
               </div>
-
-              <div>
-                <span className="editorial-tag text-accent-terracotta block mb-1">
-                  {selectedProduct.categoryLabel}
-                </span>
-                <h3 className="text-2xl font-light text-charcoal font-display">
-                  {selectedProduct.name}
-                </h3>
-              </div>
-
-              <p className="text-sm font-light text-charcoal-muted leading-relaxed">
-                {selectedProduct.description}
-              </p>
-
-              {/* Feature Points */}
-              <div className="space-y-2 border-t border-sand-border pt-4">
-                <h4 className="text-xs uppercase tracking-wider font-semibold text-charcoal mb-2">
-                  Karakteristik Produk
-                </h4>
-                <ul className="space-y-2 text-xs text-charcoal-muted">
-                  {selectedProduct.features?.map((feat, idx) => (
-                    <li key={idx} className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-accent-terracotta shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-4 border-t border-sand-border flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/stores"
-                  className="btn-editorial-primary flex-1 text-center"
-                >
-                  <MapPin className="w-4 h-4 text-accent-gold" />
-                  <span>Kunjungi Cabang Terdekat</span>
-                </Link>
-
-                <a
-                  href={OPTIK_EZIA_CONFIG.instagram.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-editorial-outline flex-1 text-center"
-                >
-                  <Instagram className="w-4 h-4 text-accent-terracotta" />
-                  <span>Tanya di Instagram</span>
-                </a>
-              </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 }
+
