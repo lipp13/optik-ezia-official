@@ -218,18 +218,16 @@ export function Hero() {
                 {/* Oversized Headline - More Responsive */}
                 <div className="space-y-1">
                   <h2 className="editorial-headline text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-charcoal leading-tight">
-                    SEE THE WORLD
+                    PRECISE VISION.
                   </h2>
                   <h2 className="editorial-headline text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal italic text-charcoal/85 font-serif leading-tight">
-                    DIFFERENTLY.
+                    TIMELESS STYLE.
                   </h2>
                 </div>
 
                 {/* Supporting Copy */}
                 <p className="text-sm sm:text-base lg:text-lg font-light text-charcoal-muted max-w-xl leading-relaxed">
-                  Optik Ezia menghadirkan kurasi kacamata, frame, lensa,
-                  sunglasses, dan softlens pilihan dengan layanan pemeriksaan
-                  mata serta fitting yang nyaman dan terpercaya.
+                  Pusat optik modern dengan standar pemeriksaan mata profesional, konsultasi lensa bersertifikasi, dan kurasi bingkai premium untuk kenyamanan visual terbaik Anda.
                 </p>
 
                 {/* Action CTAs - Full Width on Mobile */}
@@ -241,18 +239,18 @@ export function Hero() {
                       data-cursor-text="LOKASI"
                     >
                       <MapPin className="w-4 h-4 text-accent-gold" />
-                      <span className="text-[10px] sm:text-xs">Cari Cabang Terdekat</span>
+                      <span className="text-[10px] sm:text-xs">Jadwalkan Kunjungan Cabang</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </MagneticButton>
 
                   <MagneticButton strength={0.2}>
                     <Link
-                      href="/collection"
+                      href="/about"
                       className="btn-editorial-outline group w-full sm:w-auto justify-center"
-                      data-cursor-text="KOLEKSI"
+                      data-cursor-text="PROFIL"
                     >
-                      <span className="text-[10px] sm:text-xs">Lihat Koleksi Eyewear</span>
+                      <span className="text-[10px] sm:text-xs">Profil Perusahaan</span>
                       <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                     </Link>
                   </MagneticButton>
