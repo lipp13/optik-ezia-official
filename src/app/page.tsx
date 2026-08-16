@@ -8,7 +8,9 @@ import { EyewearShowcase } from "@/components/home/EyewearShowcase";
 import { EziaExperience } from "@/components/home/EziaExperience";
 import { CorporateEyecare } from "@/components/home/CorporateEyecare";
 import { WhyOptikEzia } from "@/components/home/WhyOptikEzia";
+import { Testimonials } from "@/components/home/Testimonials";
 import { StoreFinderPreview } from "@/components/home/StoreFinderPreview";
+import { FAQSection } from "@/components/home/FAQSection";
 import { FinalCTA } from "@/components/home/FinalCTA";
 
 export default function HomePage() {
@@ -23,9 +25,12 @@ export default function HomePage() {
       <EziaExperience />
       <CorporateEyecare />
       <WhyOptikEzia />
+      <Testimonials />
       <StoreFinderPreview />
+      <FAQSection />
       <FinalCTA />
     </>
   );
 }
+
 

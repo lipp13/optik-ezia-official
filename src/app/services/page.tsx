@@ -7,6 +7,7 @@ import { ArrowRight, CheckCircle2, ShieldCheck, MapPin, Instagram, Sparkles, Bui
 import { SERVICES_PROCESS, LENS_OPTIONS, WARRANTY_POLICIES, CORPORATE_SERVICES } from "@/data/services";
 import { OPTIK_EZIA_CONFIG } from "@/data/optikEzia";
 import { TextReveal } from "@/components/ui/TextReveal";
+import { FAQSection } from "@/components/home/FAQSection";
 
 export default function ServicesPage() {
   return (
@@ -243,6 +244,11 @@ export default function ServicesPage() {
               className="object-cover"
             />
           </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="pt-12">
+          <FAQSection />
         </div>
 
         {/* Consultation Guidance Banner */}
