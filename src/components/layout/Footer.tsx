@@ -109,8 +109,29 @@ export function Footer() {
                 <Instagram className="w-4 h-4 text-accent-gold" />
                 <span>{OPTIK_EZIA_CONFIG.instagram.handle}</span>
               </a>
+              {OPTIK_EZIA_CONFIG.tiktok && (
+                <a
+                  href={OPTIK_EZIA_CONFIG.tiktok.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-ivory transition-colors text-ivory"
+                >
+                  <span className="text-accent-gold font-mono text-xs font-bold">♪</span>
+                  <span>TikTok {OPTIK_EZIA_CONFIG.tiktok.handle}</span>
+                </a>
+              )}
+              {OPTIK_EZIA_CONFIG.linktree && (
+                <a
+                  href={OPTIK_EZIA_CONFIG.linktree}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-ivory transition-colors text-[11px] text-accent-gold underline underline-offset-4"
+                >
+                  <span>Linktree Resmi Cabang ↗</span>
+                </a>
+              )}
               <p className="text-[11px] text-charcoal-light leading-relaxed">
-                Kunjungi Instagram resmi untuk update model terbaru dan informasi terkini.
+                Kunjungi kanal resmi kami untuk informasi terkini dan konsultasi kacamata.
               </p>
             </div>
           </div>

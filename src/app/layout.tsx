@@ -7,6 +7,7 @@ import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { Preloader } from "@/components/ui/Preloader";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { FloatingWhatsAppWidget } from "@/components/ui/FloatingWhatsAppWidget";
 
 const sansFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -17,24 +18,39 @@ const sansFont = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://optikezia.com"),
-  title: "Optik Ezia — Modern Eyewear & Optical Care",
+  title: {
+    default: "Optik Ezia — Modern Eyewear & Optical Care",
+    template: "%s | Optik Ezia",
+  },
   description:
-    "Kurasi kacamata, frame optikal, lensa, sunglasses, dan softlens dengan layanan pemeriksaan mata terpercaya di Indonesia. Cabang di Pondok Cina, Depok Town Square, Sentul City, Cimanggu, dan Gading Serpong.",
+    "Pusat optik modern berstandar klinis di Indonesia. Layanan periksa mata refraksi 5 tahap, kurasi frame titanium & asetat, lensa anti-radiasi, serta garansi seumur hidup. Cabang di Pondok Cina, Depok Town Square, Sentul City, Cimanggu, dan Gading Serpong.",
+  keywords: [
+    "Optik Ezia",
+    "kacamata depok",
+    "optik bogor",
+    "optik gading serpong",
+    "periksa mata depok",
+    "lensa anti radiasi",
+    "optik margonda",
+    "frame titanium",
+    "optik sentul",
+  ],
   icons: {
     icon: "/images/logo.png",
   },
   openGraph: {
     title: "Optik Ezia — Modern Eyewear & Optical Care",
     description:
-      "Kurasi kacamata, frame optikal, lensa, sunglasses, dan layanan pemeriksaan mata di Indonesia.",
+      "Pusat optik modern berstandar klinis di Indonesia. Layanan periksa mata refraksi, kurasi bingkai premium, dan garansi seumur hidup di seluruh cabang.",
     type: "website",
     locale: "id_ID",
+    siteName: "Optik Ezia",
     images: [
       {
         url: "/images/logo.png",
         width: 400,
         height: 400,
-        alt: "Optik Ezia Logo",
+        alt: "Optik Ezia Official Logo",
       },
     ],
   },
@@ -55,8 +71,10 @@ export default function RootLayout({
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
+          <FloatingWhatsAppWidget />
         </SmoothScroll>
       </body>
     </html>
   );
 }
+
