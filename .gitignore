@@ -35,3 +35,5 @@ next-env.d.ts
 
 # internal design documentation
 DESIGN.md
+*.md
+!README.md
