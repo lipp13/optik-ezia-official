@@ -120,3 +120,47 @@ export const LENS_OPTIONS = [
     ],
   },
 ];
+
+export const CORPORATE_SERVICES = {
+  title: "Corporate & Community Eyecare Program",
+  subtitle: "Program Kemitraan Kesehatan Mata untuk Perusahaan & Institusi",
+  description:
+    "Optik Ezia melayani program pemeriksaan mata massal terstandar, voucher korporat, dan penyediaan kacamata kerja untuk institusi, sekolah, maupun perusahaan.",
+  benefits: [
+    {
+      title: "Pemeriksaan On-Site",
+      description: "Tim optometris kami dapat hadir langsung di kantor Anda dengan peralatan refraksi portabel standar industri.",
+    },
+    {
+      title: "Skema Manfaat Karyawan",
+      description: "Kerjasama voucher kacamata atau sistem reimburse fleksibel sesuai paket tunjangan kesehatan perusahaan.",
+    },
+    {
+      title: "Edukasi & Konsultasi Mata Digital",
+      description: "Sesi sharing seputar kesehatan mata di era digital (Computer Vision Syndrome) untuk produktivitas karyawan.",
+    },
+  ],
+};
+
+export const WARRANTY_POLICIES = [
+  {
+    title: "Garansi Akurasi Refraksi",
+    duration: "30 Hari",
+    description: "Penyesuaian ukuran lensa gratis jika dalam 30 hari pertama Anda merasa kurang nyaman atau pusing dengan ukuran baru.",
+  },
+  {
+    title: "Gratis Penyetelan & Fitting",
+    duration: "Seumur Hidup",
+    description: "Layanan fitting ulang posisi nosepad, kencangkan baut frame, dan perataan engsel di semua cabang Optik Ezia.",
+  },
+  {
+    title: "Gratis Pembersihan Ultrasonik",
+    duration: "Seumur Hidup",
+    description: "Pembersihan mendalam menggunakan gelombang ultrasonik untuk mengangkat debu dan kotoran pada sela-sela bingkai.",
+  },
+  {
+    title: "Jaminan Keaslian Lensa & Frame",
+    duration: "100% Original",
+    description: "Semua lensa optik dan bingkai yang didistribusikan terjamin keaslian dan mutunya langsung dari distributor resmi.",
+  },
+];
