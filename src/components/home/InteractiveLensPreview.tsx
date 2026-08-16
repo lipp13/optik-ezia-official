@@ -73,6 +73,14 @@ export function InteractiveLensPreview() {
     setSliderPosition((x / rect.width) * 100);
   };
 
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!containerRef.current || e.touches.length === 0) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const touch = e.touches[0];
+    const x = Math.max(0, Math.min(touch.clientX - rect.left, rect.width));
+    setSliderPosition((x / rect.width) * 100);
+  };
+
   return (
     <section className="py-24 sm:py-32 bg-ivory-warm border-t border-b border-sand-border relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -87,7 +95,7 @@ export function InteractiveLensPreview() {
             className="editorial-headline text-3xl sm:text-5xl text-charcoal"
           />
           <p className="text-base sm:text-lg font-light text-charcoal-muted mt-4">
-            Pilih mode lensa di bawah ini dan geser kursor di atas visual untuk membandingkan simulasi penglihatan secara langsung.
+            Pilih mode lensa di bawah ini dan geser kursor atau sentuh layar untuk membandingkan simulasi penglihatan secara langsung.
           </p>
         </div>
 
@@ -99,6 +107,7 @@ export function InteractiveLensPreview() {
             <div
               ref={containerRef}
               onMouseMove={handleMouseMove}
+              onTouchMove={handleTouchMove}
               className="relative aspect-[16/10] w-full overflow-hidden bg-sand/30 border border-sand-border shadow-md select-none cursor-ew-resize group"
             >
               {/* Background Base Image (Normal Sight) */}

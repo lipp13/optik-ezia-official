@@ -221,13 +221,12 @@ export function StoreFinderPreview() {
                           </a>
                           
                           <a
-                            href={OPTIK_EZIA_CONFIG.instagram.url}
+                            href={selectedStore.whatsappUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 border border-charcoal text-charcoal text-xs font-semibold uppercase tracking-wider hover:bg-charcoal hover:text-ivory transition-colors"
                           >
-                            <Instagram className="w-4 h-4" />
-                            <span>Hubungi via IG</span>
+                            <span>WhatsApp Cabang</span>
                           </a>
                         </div>
                       </div>
@@ -307,13 +306,12 @@ export function StoreFinderPreview() {
                           </a>
                           
                           <a
-                            href={OPTIK_EZIA_CONFIG.instagram.url}
+                            href={store.whatsappUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-3 border border-charcoal/20 text-charcoal text-[11px] font-semibold uppercase tracking-wider hover:border-charcoal hover:bg-charcoal/5 transition-colors"
                           >
-                            <Instagram className="w-3.5 h-3.5" />
-                            <span>Hubungi</span>
+                            <span>WhatsApp Cabang</span>
                           </a>
                         </div>
                       </div>
