@@ -23,10 +23,10 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: "/collection", label: "Koleksi" },
-    { href: "/services", label: "Pemeriksaan & Lensa" },
-    { href: "/stores", label: "Lokasi Cabang" },
     { href: "/about", label: "Tentang Kami" },
+    { href: "/services", label: "Layanan & Refraksi" },
+    { href: "/collection", label: "Kurasi Eyewear" },
+    { href: "/stores", label: "Lokasi Cabang" },
   ];
 
   return (
